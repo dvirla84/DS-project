@@ -5,6 +5,7 @@
 class Graph_Edge {
 private:
     int x;
+    int y;
 };
 
 
