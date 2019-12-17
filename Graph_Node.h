@@ -1,0 +1,10 @@
+#ifndef DIRECTEDGRAPH_GRAPH_NODE_H
+#define DIRECTEDGRAPH_GRAPH_NODE_H
+
+
+class Graph_Node {
+
+};
+
+
+#endif //DIRECTEDGRAPH_GRAPH_NODE_H
