@@ -4,10 +4,9 @@
 #include <cstddef>
 
 template <typename T>class ListItem{
-private:
+public: //put it in private!!!!!
     T item;
     T* next;
-public:
     ListItem(const T &_item):item(_item),next(NULL){}
 };
 
