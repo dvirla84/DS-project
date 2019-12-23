@@ -7,10 +7,10 @@
 static const int PARENT_SIBLING = 0;
 static const int CHILD = 1;
 
-Rooted_Tree:: Rooted_Tree(){root = nullptr;}
 Rooted_Tree:: ~Rooted_Tree()
 {
-    Tree_Node *x = this->root;
+    Tree_Node *y;
+    Tree_Node *x = this->_root;
     int from = PARENT_SIBLING;
     while (x != nullptr)
     {
@@ -19,20 +19,34 @@ Rooted_Tree:: ~Rooted_Tree()
             if (x->Get_left_child() != nullptr) x = x->Get_left_child();
             else
             {
-                if (x->Get_right_sibling() != nullptr) x = x->Delete_Node_And_Go_To(x->Get_right_sibling());
+                if (x->Get_right_sibling() != nullptr)
+                {
+                    y = x;
+                    x = x->Get_right_sibling();
+                    delete y;
+                }
                 else
                 {
                     from = CHILD;
-                    x = x->Delete_Node_And_Go_To(x->Get_parent());
+                    y = x;
+                    x = x->Get_parent();
+                    delete y;
                 }
             }
         }
         else if (x->Get_right_sibling() != nullptr)
         {
             from = PARENT_SIBLING;
-            x = x->Delete_Node_And_Go_To(x->Get_right_sibling());
+            y = x;
+            x = x->Get_right_sibling();
+            delete y;
         }
-        else x->Delete_Node_And_Go_To(x->Get_parent());
+        else
+            {
+                y = x;
+                x = x->Get_parent();
+                delete y;
+            }
     }
 }
 void Rooted_Tree::Print_By_Layer(std::ostream & stream) const {}
