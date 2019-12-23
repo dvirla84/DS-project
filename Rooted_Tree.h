@@ -12,13 +12,13 @@
 
 class Rooted_Tree {
 private:
-    Tree_Node *root;
+    Tree_Node *_root;
 public:
-    Rooted_Tree();
+    Rooted_Tree():_root(NULL){};
     ~Rooted_Tree();
     void Print_By_Layer(std::ostream& stream) const;
     void Preorder_Print(std::ostream& stream) const;
-    Tree_Node *Get_root() const {return root;};
+    Tree_Node *getRoot() const {return _root;};
 
 
 
