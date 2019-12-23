@@ -16,35 +16,35 @@ Rooted_Tree:: ~Rooted_Tree()
     {
         if (from == PARENT_SIBLING)
         {
-            if (x->Get_left_child() != nullptr) x = x->Get_left_child();
+            if (x->getLeftChild() != nullptr) x = x->getLeftChild();
             else
             {
-                if (x->Get_right_sibling() != nullptr)
+                if (x->getRightSibling()!= nullptr)
                 {
                     y = x;
-                    x = x->Get_right_sibling();
+                    x = x->getRightSibling();
                     delete y;
                 }
                 else
                 {
                     from = CHILD;
                     y = x;
-                    x = x->Get_parent();
+                    x = x->getParent();
                     delete y;
                 }
             }
         }
-        else if (x->Get_right_sibling() != nullptr)
+        else if (x->getRightSibling() != nullptr)
         {
             from = PARENT_SIBLING;
             y = x;
-            x = x->Get_right_sibling();
+            x = x->getRightSibling();
             delete y;
         }
         else
             {
                 y = x;
-                x = x->Get_parent();
+                x = x->getParent();
                 delete y;
             }
     }
