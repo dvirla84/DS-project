@@ -6,11 +6,11 @@
 #include "Node.h"
 class Graph_Node: public Node {
 private:
-    List<Graph_Node> Out;
-    List<Graph_Node> In;
+    List<Graph_Node> _Out;
+    List<Graph_Node> _In;
 public:
-    unsigned Get_out_Degree() const {return Out.getSize();}
-    unsigned Get_in_Degree() const {return In.getSize();}
+    unsigned Get_out_Degree() const {return _Out.getSize();}
+    unsigned Get_in_Degree() const {return _In.getSize();}
 
 };
 

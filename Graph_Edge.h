@@ -4,11 +4,11 @@
 
 class Graph_Edge {
 private:
-    unsigned key_from;
-    unsigned key_to;
+    unsigned _keyFrom;
+    unsigned _keyTo;
 public:
-    unsigned get_from() const{return key_from;}
-    unsigned  get_to() const{return key_to;}
+    unsigned getFrom() const{return _keyFrom;}
+    unsigned  getTo() const{return _keyTo;}
 };
 
 

@@ -8,10 +8,10 @@
 
 class Node {
 protected:
-    unsigned key;
+    unsigned _key;
 public:
-    bool operator == (Node t){return (this->key == t.key);}
-    unsigned Get_key() const{return key;}
+    bool operator == (Node t){return (this->_key == t._key);}
+    unsigned Get_key() const{return _key;}
 
 };
 

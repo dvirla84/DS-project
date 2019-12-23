@@ -10,15 +10,17 @@
 
 class Tree_Node: public Node {
 private:
-    Tree_Node *parent;
-    Tree_Node *left_child;
-    Tree_Node *right_sibling;
+    Tree_Node *_parent;
+    Tree_Node *_left_child;
+    Tree_Node *_right_sibling;
 public:
-    Tree_Node();
-    Tree_Node *Delete_Node_And_Go_To(Tree_Node *go_to);
-    Tree_Node *Get_parent() const {return parent;};
-    Tree_Node *Get_left_child() const {return left_child;};
-    Tree_Node *Get_right_sibling() const {return right_sibling;};
+    Tree_Node():
+    _parent(NULL),
+    _left_child(NULL),
+    _right_sibling(NULL){};
+    Tree_Node *getParent() const {return _parent;};
+    Tree_Node *getLeftChild() const {return _left_child;};
+    Tree_Node *getRightSibling() const {return _right_sibling;};
 };
 
 
