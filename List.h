@@ -7,7 +7,8 @@ template <typename T>class ListItem{
 public: //put it in private!!!!!
     T item;
     T* next;
-    ListItem(const T &_item):item(_item),next(NULL){}
+    T* previous;
+    ListItem(const T &_item):item(_item),next(NULL),previous(NULL){};
 };
 
 template <typename T>
@@ -21,14 +22,14 @@ public:
         tail(NULL)
     {}
 
-    void push(const T &val) {
-        ListItem<T> *t = new ListItem<T>(val);
+    void push(const ListItem<T> *t) {
         if(!head){
             head = t;
             tail = t;
         }
         else{
             tail->next = t;
+            t->previous = tail;
             tail = t;
         }
     }
@@ -41,13 +42,9 @@ public:
         return NULL;
     }
 
-    void erase(T val){
-        ListItem<T> *before = head;
-        while(before->next->item != val)
-            before = before->next;
-        ListItem<T> *ToErase = before->next;
-        before->next = ToErase->next;
-        delete ToErase;
+    void erase(ListItem<T>* val){
+        val->previous->next = val->next;
+        delete val;
     }
 
     unsigned getSize() const{
