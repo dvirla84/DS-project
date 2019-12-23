@@ -49,6 +49,15 @@ Rooted_Tree:: ~Rooted_Tree()
             }
     }
 }
-void Rooted_Tree::Print_By_Layer(std::ostream & stream) const {}
+void Rooted_Tree::Print_By_Layer(std::ostream & stream) const
+{
+    List<Tree_Node*> list;
+    Tree_Node *x = this->_root;
+    list.push();
+    while (list.getSize() >0);
+    List<int> list1;
+    list1.push(reinterpret_cast<const ListItem<int> *>(1));
+
+}
 void Rooted_Tree::Preorder_Print(std::ostream & stream) const {}
 ;
