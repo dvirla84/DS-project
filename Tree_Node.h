@@ -14,13 +14,18 @@ private:
     Tree_Node *_left_child;
     Tree_Node *_right_sibling;
 public:
-    Tree_Node():
+    Tree_Node(unsigned key):
+    Node(key),
     _parent(NULL),
     _left_child(NULL),
     _right_sibling(NULL){};
     Tree_Node *getParent() const {return _parent;};
     Tree_Node *getLeftChild() const {return _left_child;};
     Tree_Node *getRightSibling() const {return _right_sibling;};
+    void setParent(Tree_Node *newParent);
+    void setLeftChild(Tree_Node *newChild);
+    void setRightSibling(Tree_Node *newSibling);
+
 };
 
 

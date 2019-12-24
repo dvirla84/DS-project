@@ -12,14 +12,14 @@ Rooted_Tree:: ~Rooted_Tree()
     Tree_Node *y;
     Tree_Node *x = this->_root;
     int from = PARENT_SIBLING;
-    while (x != nullptr)
+    while (x != NULL)
     {
         if (from == PARENT_SIBLING)
         {
-            if (x->getLeftChild() != nullptr) x = x->getLeftChild();
+            if (x->getLeftChild() != NULL) x = x->getLeftChild();
             else
             {
-                if (x->getRightSibling()!= nullptr)
+                if (x->getRightSibling()!= NULL)
                 {
                     y = x;
                     x = x->getRightSibling();
@@ -34,7 +34,7 @@ Rooted_Tree:: ~Rooted_Tree()
                 }
             }
         }
-        else if (x->getRightSibling() != nullptr)
+        else if (x->getRightSibling() != NULL)
         {
             from = PARENT_SIBLING;
             y = x;
@@ -68,7 +68,6 @@ void Rooted_Tree::Print_By_Layer(std::ostream & stream) const
         }
         stream << "\n";
     }
-
 }
 void Rooted_Tree::Preorder_Print(std::ostream & stream) const {}
 ;

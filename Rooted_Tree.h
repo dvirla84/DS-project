@@ -19,6 +19,7 @@ public:
     void Print_By_Layer(std::ostream& stream) const;
     void Preorder_Print(std::ostream& stream) const;
     Tree_Node *getRoot() const {return _root;};
+    Tree_Node *setRoot(Tree_Node* newRoot) {_root = newRoot;};
 
 
 

@@ -10,8 +10,11 @@ class Node {
 protected:
     unsigned _key;
 public:
+    Node (unsigned key):
+    _key(key){};
     bool operator == (Node t){return (this->_key == t._key);}
     unsigned Get_key() const{return _key;}
+    void setKey(unsigned newKey){_key =newKey;}
 
 };
 
