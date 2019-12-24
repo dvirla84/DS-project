@@ -51,11 +51,51 @@ public:
         }
         _size++;
     }
+    void pushBack(const T t)
+    {
+        ListItem<T> *listItem = new ListItem<T>(t);
+        if (_size == 0 )
+        {
+            _head = listItem;
+            _tail = listItem;
+        }
+        else
+        {
+            listItem->_next = _tail;
+            _tail->_previous = listItem;
+            _tail = listItem;
+        }
+        _size ++;
+    }
+    T* popBack ()
+    {
+        if (_size == 0) return NULL;
+        else
+        {
+            T popped = _tail->_item;
+            _tail = _tail->_next;
+            _size --;
+            delete _tail->_previous;
+            _tail->_previous = NULL;
+            return popped;
+        }
+    }
 
 
-    void erase(ListItem<T>* val){
-        val->_next->_previous = val->_previous;
-        val->previous->next = val->next;
+    void erase(ListItem<T>* val)
+    {
+
+        if(val->_next!= NULL) val->_next->_previous = val->_previous;
+        else{
+            _head = val->_previous;
+            _head->_next = NULL;
+        }
+        if (val->_previous!= NULL) val->previous->next = val->next;
+        else
+            {
+            _tail = val->_next;
+            _tail->_previous = NULL;
+        }
         delete val;
         _size--;
     }
