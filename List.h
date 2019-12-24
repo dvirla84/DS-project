@@ -6,8 +6,8 @@
 template <typename T>class ListItem{
 public: //put it in private!!!!!
     T _item;
-    T* _next;
-    T* _previous;
+    ListItem<T>* _next;
+    ListItem<T>* _previous;
     ListItem(const T &_item):_item(_item),_next(NULL),_previous(NULL){};
 };
 
@@ -23,31 +23,33 @@ public:
         _tail(NULL),
         _size(0)
     {}
-    T* pop(){
-        T* popped = _tail->_item;
-        _tail = _tail->previous;
-        delete _tail->next;
+
+    T* popFront(){
+        T popped = _head->_item;
+        _head = _head->previous;
+        delete _head->next;
         _size--;
         return popped;
     }
 
-    void push(const T t) {
-        ListItem<T> listItem;
+    void pushFront(const T t) {
+        ListItem<T> listItem = new ListItem<T>(t);
 
         if(!_head){
-            _head = t;
-            _tail = t;
+            _head = listItem;
+            _tail = listItem;
         }
         else{
-            _tail->next = t;
-            t->previous = _tail;
-            _tail = t;
+            _head->next = listItem;
+            listItem->previous = _head;
+            _head = listItem;
         }
         _size++;
     }
 
 
     void erase(ListItem<T>* val){
+        val->_next->_previous = val->_previous;
         val->previous->next = val->next;
         delete val;
         _size--;
