@@ -23,10 +23,11 @@ public:
         _tail(NULL),
         _size(0)
     {}
-    T* pop_front(){
-        T* popped = _tail->_item;
-        _tail = _tail->previous;
-        delete _tail->next;
+
+    T* popFront(){
+        T popped = _head->_item;
+        _head = _head->previous;
+        delete _head->next;
         _size--;
         return popped;
     }
