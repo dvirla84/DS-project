@@ -32,6 +32,7 @@ public:
         T popped = _head->_item;
         _head = _head->previous;
         delete _head->next;
+        _head->_next = NULL;
         _size--;
         return popped;
     }
