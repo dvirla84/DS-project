@@ -4,7 +4,8 @@
 #include <cstddef>
 
 template <typename T>class ListItem{
-public: //put it in private!!!!!
+    template <typename U> friend class List;
+private: //put it in private!!!!!
     T _item;
     ListItem<T>* _next;
     ListItem<T>* _previous;
@@ -24,29 +25,25 @@ public:
         _size(0)
     {}
 
-    T* popFront(){
-        if(_size == 0)
-        {
-            return NULL;
-        }
+    T popFront(){
+        if(_size == 0) return -1;
         T popped = _head->_item;
-        _head = _head->previous;
-        delete _head->next;
-        _head->_next = NULL;
+        ListItem<T>* temp = _head->_previous;
         _size--;
+        delete _head;
+        _head = temp;
         return popped;
     }
 
     void pushFront(const T t) {
-        ListItem<T> listItem = new ListItem<T>(t);
-
-        if(!_head){
+        ListItem<T> *listItem = new ListItem<T>(t);
+        if(_size == 0){
             _head = listItem;
             _tail = listItem;
         }
         else{
-            _head->next = listItem;
-            listItem->previous = _head;
+            _head->_next = listItem;
+            listItem->_previous = _head;
             _head = listItem;
         }
         _size++;
@@ -67,16 +64,16 @@ public:
         }
         _size ++;
     }
-    T* popBack ()
+    T popBack ()
     {
-        if (_size == 0) return NULL;
+        if (_size == 0) return -1;
         else
         {
             T popped = _tail->_item;
-            _tail = _tail->_next;
+            ListItem<T>* temp = _tail->_next;
             _size --;
-            delete _tail->_previous;
-            _tail->_previous = NULL;
+            delete _tail;
+            _tail = temp;
             return popped;
         }
     }
@@ -103,16 +100,19 @@ public:
     unsigned getSize() const{
         return _size;
     }
+
     ~List(){
         ListItem<T> *eraser = _head;
         while(eraser != _tail){
-            ListItem<T> *temp = eraser->next;
+            ListItem<T> *temp = eraser->_previous;
             delete eraser;
             eraser = temp;
         }
-        delete  eraser;
+        if(eraser != NULL) delete  eraser;
     }
+
 };
+
 
 
 #endif //DIRECTEDGRAPH_LIST_H

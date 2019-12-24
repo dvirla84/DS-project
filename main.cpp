@@ -4,8 +4,18 @@
 #include "Graph_Node.h"
 #include "Graph_Edge.h"
 #include "Rooted_Tree.h"
+#include "List.h"
 
 int main() {
+    List<int> *list = new List<int>;
+    list->pushFront(1);
+    list->pushBack(2);
+    int x = list->popFront();
+    int y = list->popBack();
+    int z = list->popBack();
+
+
+
 
 }
 
