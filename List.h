@@ -24,6 +24,7 @@ public:
         _tail(NULL),
         _size(0)
     {}
+    // need to implement search
 
     T popFront(){
         if(_size == 0) return -1;
@@ -78,7 +79,7 @@ public:
         }
     }
 
-
+// not working
     void erase(ListItem<T>* val)
     {
 
@@ -96,6 +97,7 @@ public:
         delete val;
         _size--;
     }
+
 
     unsigned getSize() const{
         return _size;
