@@ -32,11 +32,11 @@ int main() {
     tree->Preorder_Print(std::cout);
 //    tree->Print_By_Layer(std::cout);
     delete tree;
-    delete n1;
-    delete n2;
-    delete n3;
-    delete n4;
-    delete n5;
+//    delete n1;
+//    delete n2;
+//    delete n3;
+//    delete n4;
+//    delete n5;
 
 }
 

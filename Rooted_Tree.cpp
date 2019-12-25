@@ -78,13 +78,14 @@ void Rooted_Tree::Preorder_Print(std::ostream & stream) const
     while (rightSiblings->getSize() > 0)
     {
         Tree_Node *temp = rightSiblings->popFront();
-        stream << temp->Get_key();
+        if(temp->getLeftChild()!=NULL) stream << temp->Get_key()<< ",";
+        else stream << temp->Get_key();
         if (temp->getRightSibling() != NULL) rightSiblings->pushFront(temp->getRightSibling());
         while (temp->getLeftChild()!=NULL)
         {
             temp = temp->getLeftChild();
             if (temp->getRightSibling() != NULL) rightSiblings->pushFront(temp->getRightSibling());
-            stream  << "," << temp->Get_key();
+            stream  << temp->Get_key() << "," ;
         }
     }
     delete rightSiblings;
