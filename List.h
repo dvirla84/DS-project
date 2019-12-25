@@ -83,7 +83,6 @@ public:
 // not working
     void erase(ListItem<T>* val)
     {
-
         if(val->_next!= NULL) val->_next->_previous = val->_previous;
         else{
             _head = val->_previous;
