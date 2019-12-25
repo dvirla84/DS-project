@@ -13,8 +13,8 @@ public:
     Node(key),
     _Out(new List<Graph_Node>),
     _In(new List<Graph_Node>){}
-    unsigned Get_out_Degree() const {return _Out.getSize();}
-    unsigned Get_in_Degree() const {return _In.getSize();}
+    unsigned Get_out_Degree() const {return _Out->getSize();}
+    unsigned Get_in_Degree() const {return _In->getSize();}
     ~Graph_Node();
 };
 
