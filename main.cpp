@@ -14,29 +14,23 @@ int main() {
 //    int x = list->popFront();
 //    int y = list->popBack();
 //    int z = list->popBack();
-    Tree_Node *n1 = new Tree_Node(0);
-    Tree_Node *n2 = new Tree_Node(1);
-    Tree_Node *n3 = new Tree_Node(2);
-    Tree_Node *n4 = new Tree_Node(3);
-    Tree_Node *n5 = new Tree_Node(4);
-    Rooted_Tree *tree = new Rooted_Tree;
-    tree->setRoot(n1);
-    n1->setLeftChild(n2);
-    n2->setParent(n1);
-    n2->setRightSibling(n3);
-    n3->setParent(n1);
-    n3->setRightSibling(n4);
-    n4->setParent(n1);
-    n3->setLeftChild(n5);
-    n5->setParent(n3);
-    tree->Preorder_Print(std::cout);
+//    Tree_Node *n1 = new Tree_Node(0);
+//    Tree_Node *n2 = new Tree_Node(1);
+//    Tree_Node *n3 = new Tree_Node(2);
+//    Tree_Node *n4 = new Tree_Node(3);
+//    Tree_Node *n5 = new Tree_Node(4);
+//    Rooted_Tree *tree = new Rooted_Tree;
+//    tree->setRoot(n1);
+//    n1->setLeftChild(n2);
+//    n2->setParent(n1);
+//    n2->setRightSibling(n3);
+//    n3->setParent(n1);
+//    n3->setRightSibling(n4);
+//    n4->setParent(n1);
+//    n3->setLeftChild(n5);
+//    n5->setParent(n3);
+//    tree->Preorder_Print(std::cout);
 //    tree->Print_By_Layer(std::cout);
-    delete tree;
-//    delete n1;
-//    delete n2;
-//    delete n3;
-//    delete n4;
-//    delete n5;
 
 }
 

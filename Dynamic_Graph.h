@@ -3,7 +3,10 @@
 
 
 class Dynamic_Graph {
+private:
 
+public:
+    Dynamic_Graph(){};
 };
 
 
