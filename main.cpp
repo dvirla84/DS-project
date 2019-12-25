@@ -32,8 +32,6 @@ int main() {
 //    tree->Preorder_Print(std::cout);
 //    tree->Print_By_Layer(std::cout);
 
-    int x = 5;
-    char y = 's';
 }
 
 /*
