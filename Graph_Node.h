@@ -9,10 +9,7 @@ private:
     List<Graph_Node>* _Out;
     List<Graph_Node>* _In;
 public:
-    Graph_Node(unsigned key):
-    Node(key),
-    _Out(new List<Graph_Node>),
-    _In(new List<Graph_Node>){}
+    Graph_Node(unsigned key);
     unsigned Get_out_Degree() const {return _Out->getSize();}
     unsigned Get_in_Degree() const {return _In->getSize();}
     ~Graph_Node();
