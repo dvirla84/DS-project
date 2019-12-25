@@ -1,15 +1,15 @@
 #ifndef DIRECTEDGRAPH_GRAPH_EDGE_H
 #define DIRECTEDGRAPH_GRAPH_EDGE_H
 
-
+#include "Graph_Node.h"
 class Graph_Edge {
 private:
-    unsigned _keyFrom;
-    unsigned _keyTo;
+    Graph_Node *_from;
+    Graph_Node *_to;
 public:
-    Graph_Edge(unsigned from, unsigned to);
-    unsigned getFrom() const{return _keyFrom;}
-    unsigned  getTo() const{return _keyTo;}
+    Graph_Edge(Graph_Node *from, Graph_Node *to);
+    Graph_Node *getFrom() const{return _from;}
+    Graph_Node *getTo() const{return _to;}
 };
 
 

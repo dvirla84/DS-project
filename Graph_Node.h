@@ -4,6 +4,7 @@
 #include "List.h"
 #include <cstddef>
 #include "Node.h"
+#include "Graph_Node.h"
 class Graph_Node: public Node {
 private:
     List<Graph_Node*>* _Out;
