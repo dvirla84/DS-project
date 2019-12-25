@@ -31,6 +31,7 @@ public:
         T popped = _head->_item;
         ListItem<T>* temp = _head->_previous;
         _size--;
+        if(_size == 0) _tail = NULL;
         delete _head;
         _head = temp;
         return popped;
@@ -105,7 +106,7 @@ public:
 
     ~List(){
         ListItem<T> *eraser = _head;
-        while(eraser != _tail){
+        while(eraser != NULL && eraser != _tail){
             ListItem<T> *temp = eraser->_previous;
             delete eraser;
             eraser = temp;

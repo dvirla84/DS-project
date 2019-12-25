@@ -68,6 +68,24 @@ void Rooted_Tree::Print_By_Layer(std::ostream & stream) const
         }
         stream << "\n";
     }
+    delete leftChildren;
 }
-void Rooted_Tree::Preorder_Print(std::ostream & stream) const {}
-;
+void Rooted_Tree::Preorder_Print(std::ostream & stream) const
+{
+    List<Tree_Node*> *rightSiblings = new List<Tree_Node*>;
+    Tree_Node *x = this->_root;
+    rightSiblings->pushFront(x);
+    while (rightSiblings->getSize() > 0)
+    {
+        Tree_Node *temp = rightSiblings->popFront();
+        stream << temp->Get_key();
+        if (temp->getRightSibling() != NULL) rightSiblings->pushFront(temp->getRightSibling());
+        while (temp->getLeftChild()!=NULL)
+        {
+            temp = temp->getLeftChild();
+            if (temp->getRightSibling() != NULL) rightSiblings->pushFront(temp->getRightSibling());
+            stream  << "," << temp->Get_key();
+        }
+    }
+    delete rightSiblings;
+}

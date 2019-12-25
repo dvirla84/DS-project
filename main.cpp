@@ -1,4 +1,5 @@
 
+#include <iostream>
 #include <cstdlib>
 #include "Dynamic_Graph.h"
 #include "Graph_Node.h"
@@ -28,8 +29,14 @@ int main() {
     n4->setParent(n1);
     n3->setLeftChild(n5);
     n5->setParent(n3);
+    tree->Preorder_Print(std::cout);
+//    tree->Print_By_Layer(std::cout);
     delete tree;
-//    tree->Print_By_Layer(cout);
+    delete n1;
+    delete n2;
+    delete n3;
+    delete n4;
+    delete n5;
 
 }
 
