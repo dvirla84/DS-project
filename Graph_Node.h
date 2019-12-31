@@ -16,7 +16,7 @@ public:
     Graph_Node(unsigned key);
     void setSelfPointer(ListItem<Graph_Node*>* selfPointer);
     unsigned Get_out_Degree() const {return _outList->getSize();}
-    unsigned Get_in_Degree() const {return _inCounter();}
+    unsigned Get_in_Degree() const {return _inCounter;}
     ~Graph_Node();
 };
 
