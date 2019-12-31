@@ -11,9 +11,7 @@ int main() {
     Dynamic_Graph* DG = new Dynamic_Graph();
     Graph_Node* node1 = DG->Insert_Node(1);
     Graph_Node* node2 = DG->Insert_Node(2);
-    DG->printNodes();
     Graph_Edge* edge1 = DG->Insert_Edge(node1,node2);
-    DG->printEdges();
     delete DG;
 //    Tree_Node *n1 = new Tree_Node(0);
 //    Tree_Node *n2 = new Tree_Node(1);

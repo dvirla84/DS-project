@@ -1,5 +1,4 @@
 #include "Dynamic_Graph.h"
-#include <iostream>
 
 Dynamic_Graph::Dynamic_Graph():
         _nodes(new List<Graph_Node*>),
@@ -10,12 +9,12 @@ Dynamic_Graph:: ~Dynamic_Graph()
 {
     while(_edges->getSize() > 0)
     {
-        Graph_Edge* temp = _edges->popFront();
+        Graph_Edge* temp = _edges->top();
         this->Delete_Edge(temp);
     }
     while(_nodes->getSize() > 0)
     {
-        Graph_Node* temp = _nodes->popFront();
+        Graph_Node* temp = _nodes->top();
         this->Delete_Node(temp);
     }
     delete _nodes;
@@ -44,28 +43,12 @@ Graph_Edge* Dynamic_Graph:: Insert_Edge(Graph_Node* from, Graph_Node* to)
 
 void Dynamic_Graph:: Delete_Edge(Graph_Edge* edge)
 {
-    _edges->erase(edge->getSelfPointer());
+    ListItem<Graph_Edge*>* temp = edge->getSelfPointer();
+    _edges->erase(temp);
     edge->getFrom()->eraseOutEdge(edge->getOutPointer());
     delete edge;
 }
 
-void Dynamic_Graph::printNodes()
-{
-    unsigned size = _nodes->getSize();
-    for (int i = 0; i < size; ++i)
-    {
-        std::cout << _nodes->popBack()->Get_key() << std::endl;
-    }
-}
-
-void Dynamic_Graph::printEdges()
-{
-    unsigned size = _edges->getSize();
-    for (int i = 0; i < size; ++i)
-    {
-        std::cout << _edges->popBack()->getFrom()->Get_key() << std::endl;
-    }
-}
 
 Rooted_Tree* Dynamic_Graph:: SCC() const {}
 

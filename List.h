@@ -5,12 +5,13 @@
 
 template <typename T>class ListItem{
     template <typename U> friend class List;
-private: //put it in private!!!!!
+private:
     T _item;
     ListItem<T>* _next;
     ListItem<T>* _previous;
 public:
     ListItem(const T &_item):_item(_item),_next(NULL),_previous(NULL){};
+    ~ListItem(){};
 };
 
 template <typename T>
@@ -103,18 +104,24 @@ public:
         if(val->_next!= NULL) val->_next->_previous = val->_previous;
         else{
             _head = val->_previous;
-            _head->_next = NULL;
+            if(_head != NULL)
+                _head->_next = NULL;
         }
         if (val->_previous!= NULL) val->_previous->_next = val->_next;
         else
         {
             _tail = val->_next;
-            _tail->_previous = NULL;
+            if(_tail!=NULL)
+                _tail->_previous = NULL;
         }
         delete val;
         _size--;
     }
 
+    T top()
+    {
+        return _head->_item;
+    }
 
     unsigned getSize() const{
         return _size;
