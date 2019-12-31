@@ -6,4 +6,5 @@ Graph_Edge::Graph_Edge(Graph_Node *from, Graph_Node *to):
         _to(to),
         _selfPointer(NULL),
         _outPointer(NULL)
-{}
+        {
+}

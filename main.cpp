@@ -8,12 +8,11 @@
 #include "List.h"
 
 int main() {
-//    List<int> *list = new List<int>;
-//    list->pushFront(1);
-//    list->pushBack(2);
-//    int x = list->popFront();
-//    int y = list->popBack();
-//    int z = list->popBack();
+    Dynamic_Graph* DG = new Dynamic_Graph();
+    Graph_Node* node1 = DG->Insert_Node(1);
+    Graph_Node* node2 = DG->Insert_Node(2);
+    Graph_Edge* edge1 = DG->Insert_Edge(node1,node2);
+    delete DG;
 //    Tree_Node *n1 = new Tree_Node(0);
 //    Tree_Node *n2 = new Tree_Node(1);
 //    Tree_Node *n3 = new Tree_Node(2);

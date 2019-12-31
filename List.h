@@ -105,7 +105,7 @@ public:
             _head = val->_previous;
             _head->_next = NULL;
         }
-        if (val->_previous!= NULL) val->previous->next = val->next;
+        if (val->_previous!= NULL) val->_previous->_next = val->_next;
         else
         {
             _tail = val->_next;

@@ -15,3 +15,4 @@ void Graph_Node:: setSelfPointer(ListItem<Graph_Node*>* selfPointer)
 {
     _selfPointer = selfPointer;
 }
+

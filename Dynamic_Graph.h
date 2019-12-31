@@ -9,8 +9,6 @@
 class Dynamic_Graph {
 private:
     List<Graph_Node*> *_nodes;
-    unsigned _nodesSize;
-    unsigned _edgesSize;
     List<Graph_Edge*> *_edges;
 
 public:
