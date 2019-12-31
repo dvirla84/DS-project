@@ -20,6 +20,8 @@ public:
     void Delete_Edge(Graph_Edge* edge);
     Rooted_Tree* SCC() const;
     Rooted_Tree* BFS(Graph_Node* source) const;
+    void printNodes();
+    void printEdges();
 };
 
 

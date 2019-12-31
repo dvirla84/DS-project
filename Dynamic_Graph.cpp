@@ -1,4 +1,5 @@
 #include "Dynamic_Graph.h"
+#include <iostream>
 
 Dynamic_Graph::Dynamic_Graph():
         _nodes(new List<Graph_Node*>),
@@ -46,6 +47,24 @@ void Dynamic_Graph:: Delete_Edge(Graph_Edge* edge)
     _edges->erase(edge->getSelfPointer());
     edge->getFrom()->eraseOutEdge(edge->getOutPointer());
     delete edge;
+}
+
+void Dynamic_Graph::printNodes()
+{
+    unsigned size = _nodes->getSize();
+    for (int i = 0; i < size; ++i)
+    {
+        std::cout << _nodes->popBack()->Get_key() << std::endl;
+    }
+}
+
+void Dynamic_Graph::printEdges()
+{
+    unsigned size = _edges->getSize();
+    for (int i = 0; i < size; ++i)
+    {
+        std::cout << _edges->popBack()->getFrom()->Get_key() << std::endl;
+    }
 }
 
 Rooted_Tree* Dynamic_Graph:: SCC() const {}
