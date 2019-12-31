@@ -4,18 +4,19 @@
 #include "List.h"
 #include <cstddef>
 #include "Node.h"
+#include "Graph_Edge.h"
+#include "List.h"
+
 class Graph_Node: public Node {
 private:
-    List<Graph_Node*>* _out;
-    List<Graph_Node*>* _in;
-    Graph_Node* _next;
-    Graph_Node* _previous;
+    ListItem<Graph_Node*>* _selfPointer;
+    List<Graph_Edge*>* _outList;
+    unsigned _inCounter;
 public:
     Graph_Node(unsigned key);
-    Graph_Node* getNext() {return _next;}
-    Graph_Node* getPrevious() {return _previous;}
+    void setSelfPointer(ListItem<Graph_Node*>* selfPointer);
     unsigned Get_out_Degree() const {return _out->getSize();}
-    unsigned Get_in_Degree() const {return _in->getSize();}
+    unsigned Get_in_Degree() const {return _inCounter();}
     ~Graph_Node();
 };
 

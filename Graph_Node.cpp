@@ -1,15 +1,17 @@
 #include "Graph_Node.h"
+
 Graph_Node::Graph_Node(unsigned key):
-    Node(key),
-    _out(new List<Graph_Node*>),
-    _in(new List<Graph_Node*>),
-    _next(NULL),
-    _previous(NULL){}
+        Node(key),
+        _selfPointer(NULL),
+        _outList(new List<Graph_Edge*>),
+        _inCounter(0){}
 
 Graph_Node:: ~Graph_Node()
 {
-    delete _out;
-    delete _in;
-    if(_next != NULL) _next->_previous = _previous;
-    if(_previous != NULL) _previous->_next = _next;
+    delete _outList;
+}
+
+void Graph_Node:: setSelfPointer(ListItem<Graph_Node*>* selfPointer)
+{
+    _selfPointer = selfPointer;
 }

@@ -9,6 +9,7 @@ private: //put it in private!!!!!
     T _item;
     ListItem<T>* _next;
     ListItem<T>* _previous;
+public:
     ListItem(const T &_item):_item(_item),_next(NULL),_previous(NULL){};
 };
 
@@ -20,24 +21,33 @@ private:
     unsigned _size;
 public:
     List():
-        _head(NULL),
-        _tail(NULL),
-        _size(0)
+            _head(NULL),
+            _tail(NULL),
+            _size(0)
     {}
     // need to implement search
 
-    T popFront(){
-        if(_size == 0) return NULL;
+    T popFront()
+    {
+//      if(_size == 0) return NULL;
         T popped = _head->_item;
         ListItem<T>* temp = _head->_previous;
         _size--;
-        if(_size == 0) _tail = NULL;
         delete _head;
-        _head = temp;
+        if(_size == 0)
+        {
+            _tail = NULL;
+            _head = NULL;
+        }
+        else
+        {
+            _head = temp;
+            _head->_next = NULL;
+        }
         return popped;
     }
 
-    void pushFront(const T t) {
+    ListItem<T>* pushFront(const T t) {
         ListItem<T> *listItem = new ListItem<T>(t);
         if(_size == 0){
             _head = listItem;
@@ -49,8 +59,9 @@ public:
             _head = listItem;
         }
         _size++;
+        return listItem;
     }
-    void pushBack(const T t)
+    ListItem<T>* pushBack(const T t)
     {
         ListItem<T> *listItem = new ListItem<T>(t);
         if (_size == 0 )
@@ -65,22 +76,28 @@ public:
             _tail = listItem;
         }
         _size ++;
+        return listItem;
     }
     T popBack ()
     {
-        if (_size == 0) return NULL;
+//      if (_size == 0) return NULL;
+        T popped = _tail->_item;
+        ListItem<T>* temp = _tail->_next;
+        _size --;
+        delete _tail;
+        if (_size == 0)
+        {
+            _head = NULL;
+            _tail = NULL;
+        }
         else
         {
-            T popped = _tail->_item;
-            ListItem<T>* temp = _tail->_next;
-            _size --;
-            delete _tail;
             _tail = temp;
-            return popped;
+            _tail->_previous = NULL;
         }
+        return popped;
     }
 
-// not working
     void erase(ListItem<T>* val)
     {
         if(val->_next!= NULL) val->_next->_previous = val->_previous;
@@ -90,7 +107,7 @@ public:
         }
         if (val->_previous!= NULL) val->previous->next = val->next;
         else
-            {
+        {
             _tail = val->_next;
             _tail->_previous = NULL;
         }

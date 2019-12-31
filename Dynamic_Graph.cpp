@@ -1,40 +1,36 @@
 #include "Dynamic_Graph.h"
 
 Dynamic_Graph::  Dynamic_Graph():
-_firstNode (NULL),
-_nodesSize(0),
-_firstEdge(NULL),
-_edgesSize(0)
+        _nodes (new List<Graph_Node*>),
+        _nodesSize(0),
+        _edgesSize(0),
+        _edges(new List<Graph_Edge*>)
 {}
 
 Dynamic_Graph:: ~Dynamic_Graph()
 {
-    Graph_Node* x = _firstNode;
-    while(x != NULL)
-    {
-        Graph_Node* temp = x->getNext();
-        delete x;
-        x = temp;
-    }
-    Graph_Edge* y = _firstEdge;
-    while(y != NULL)
-    {
-        Graph_Edge* temp = y->getNext();
-        delete y;
-        y = temp;
-    }
+    delete _nodes;
+    delete _edges;
 }
 
-Graph_Node* Dynamic_Graph::  Insert_Node(unsigned node_key)
+Graph_Node* Dynamic_Graph:: Insert_Node(unsigned node_key)
 {
     Graph_Node* node = new Graph_Node(node_key);
-    _nodes->pushBack(node);
+    node->setSelfPointer(_nodes->pushBack(node));
+    _nodesSize++;
     return node;
 }
 
-void Dynamic_Graph::  Delete_Node(Graph_Node* node){}
+void Dynamic_Graph::  Delete_Node(Graph_Node* node)
+{
 
-Graph_Edge*  Dynamic_Graph:: Insert_Edge(Graph_Node* from, Graph_Node* to){}
+}
+
+Graph_Edge* Dynamic_Graph:: Insert_Edge(Graph_Node* from, Graph_Node* to)
+{
+    Graph_Edge* edge = new Graph_Edge(from, to);
+
+}
 
 void Dynamic_Graph:: Delete_Edge(Graph_Edge* edge){}
 
