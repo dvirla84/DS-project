@@ -1,39 +1,8 @@
-
 #include <iostream>
 #include <cstdlib>
 #include "Dynamic_Graph.h"
-#include "Graph_Node.h"
-#include "Graph_Edge.h"
-#include "Rooted_Tree.h"
-#include "List.h"
 
-int main() {
-    Dynamic_Graph* DG = new Dynamic_Graph();
-    Graph_Node* node1 = DG->Insert_Node(1);
-    Graph_Node* node2 = DG->Insert_Node(2);
-    Graph_Edge* edge1 = DG->Insert_Edge(node1,node2);
-    delete DG;
-//    Tree_Node *n1 = new Tree_Node(0);
-//    Tree_Node *n2 = new Tree_Node(1);
-//    Tree_Node *n3 = new Tree_Node(2);
-//    Tree_Node *n4 = new Tree_Node(3);
-//    Tree_Node *n5 = new Tree_Node(4);
-//    Rooted_Tree *tree = new Rooted_Tree;
-//    tree->setRoot(n1);
-//    n1->setLeftChild(n2);
-//    n2->setParent(n1);
-//    n2->setRightSibling(n3);
-//    n3->setParent(n1);
-//    n3->setRightSibling(n4);
-//    n4->setParent(n1);
-//    n3->setLeftChild(n5);
-//    n5->setParent(n3);
-//    tree->Preorder_Print(std::cout);
-//    tree->Print_By_Layer(std::cout);
 
-}
-
-/*
 #define SEED 23454
 #define TEST_SIZE 30
 #define INITIAL_NODES_NUM 10
@@ -65,7 +34,7 @@ private:
 
 unsigned generate_random_unsigned(const unsigned max_ind)
 /*generates a random unsigned int in range [0,max_ind-1]*/
-/*{
+{
     return rand() % max_ind;
 }
 
@@ -181,93 +150,93 @@ int main()
 
     unsigned edge_index;
 
-    Rooted_Tree* T = NULL;
-
-    for (unsigned i = 0;i < TEST_SIZE;i++)
-    {
-        operation = generate_random_unsigned(NUM_OF_OPERATIONS)+1;
-        switch (operation)
-        {
-            case INSERT_NODE:
-                nodes_array[nodes_array_counter] = G->Insert_Node(node_key);
-                nodes_keys_array[nodes_array_counter] = node_key;
-                nodes_array_counter = nodes_array_counter + 1;
-                node_key = node_key + 1;
-                break;
-            case INSERT_EDGE:
-                node_index_1 = generate_random_unsigned(nodes_array_counter);
-                node_index_2 = generate_random_unsigned(nodes_array_counter);
-                if (node_index_1 != node_index_2 && edge_does_not_exists(my_edge_array,edges_array_counter,nodes_keys_array[node_index_1],nodes_keys_array[node_index_2]))
-                {
-                    edges_array[edges_array_counter] = G->Insert_Edge(nodes_array[node_index_1],nodes_array[node_index_2]);
-                    my_edge_array[edges_array_counter] = new My_Edge(nodes_keys_array[node_index_1],nodes_keys_array[node_index_2]);
-                    edges_array_counter = edges_array_counter + 1;
-                }
-                break;
-            case DELETE_NODE:
-                if (nodes_array_counter > 0)
-                {
-                    node_index_1 = generate_random_unsigned(nodes_array_counter);
-                    G->Delete_Node(nodes_array[node_index_1]);
-                    if (deleted_node(nodes_keys_array[node_index_1],my_edge_array,edges_array_counter))
-                    {
-                        shift_nodes_arrays(nodes_array,nodes_keys_array,node_index_1,nodes_array_counter);
-                        nodes_array_counter = nodes_array_counter - 1;
-                    }
-                }
-                break;
-            case DELETE_EDGE:
-                if (edges_array_counter > 0)
-                {
-                    edge_index = generate_random_unsigned(edges_array_counter);
-                    G->Delete_Edge(edges_array[edge_index]);
-                    shift_edges_arrays(edges_array,my_edge_array,edge_index,edges_array_counter);
-                    edges_array_counter = edges_array_counter - 1;
-                }
-                break;
-            case STRONGLY_CONNECTED_COMPONENTS:
-                T = G->SCC();
-                cout<<"Print in layers after SCC:"<<"\n";
-                T->Print_By_Layer(cout);
-                cout<<"\n";
-                cout<<"Preorder print after SCC:"<<"\n";
-                T->Preorder_Print(cout);
-                cout<<"\n";
-                delete T;
-                T=NULL;
-                break;
-            case RUN_BFS:
-                if (nodes_array_counter > 0)
-                {
-                    node_index_1 = generate_random_unsigned(nodes_array_counter);
-                    T = G->BFS(nodes_array[node_index_1]);
-                    cout<<"Print in layers after BFS:"<<"\n";
-                    T->Print_By_Layer(cout);
-                    cout<<"\n";
-                    cout<<"Preorder print after BFS:"<<"\n";
-                    T->Preorder_Print(cout);
-                    cout<<"\n";
-                    delete T;
-                    T=NULL;
-                }
-                break;
-            case OUT_DEGREE:
-                if (nodes_array_counter > 0) {
-                    node_index_1 = generate_random_unsigned(nodes_array_counter);
-                    cout<<"The out degree of node "<< nodes_array[node_index_1]->Get_key()<< " is " << nodes_array[node_index_1]->Get_out_Degree()<<"\n";
-                }
-                break;
-            case IN_DEGREE:
-                if (nodes_array_counter > 0) {
-                    node_index_1 = generate_random_unsigned(nodes_array_counter);
-                    cout<<"The in degree of node "<< nodes_array[node_index_1]->Get_key()<< " is " << nodes_array[node_index_1]->Get_in_Degree()<<"\n";
-                }
-                break;
-        }
-    }
+//    Rooted_Tree* T = NULL;
+//
+//    for (unsigned i = 0;i < TEST_SIZE;i++)
+//    {
+//        operation = generate_random_unsigned(NUM_OF_OPERATIONS)+1;
+//        switch (operation)
+//        {
+//            case INSERT_NODE:
+//                nodes_array[nodes_array_counter] = G->Insert_Node(node_key);
+//                nodes_keys_array[nodes_array_counter] = node_key;
+//                nodes_array_counter = nodes_array_counter + 1;
+//                node_key = node_key + 1;
+//                break;
+//            case INSERT_EDGE:
+//                node_index_1 = generate_random_unsigned(nodes_array_counter);
+//                node_index_2 = generate_random_unsigned(nodes_array_counter);
+//                if (node_index_1 != node_index_2 && edge_does_not_exists(my_edge_array,edges_array_counter,nodes_keys_array[node_index_1],nodes_keys_array[node_index_2]))
+//                {
+//                    edges_array[edges_array_counter] = G->Insert_Edge(nodes_array[node_index_1],nodes_array[node_index_2]);
+//                    my_edge_array[edges_array_counter] = new My_Edge(nodes_keys_array[node_index_1],nodes_keys_array[node_index_2]);
+//                    edges_array_counter = edges_array_counter + 1;
+//                }
+//                break;
+//            case DELETE_NODE:
+//                if (nodes_array_counter > 0)
+//                {
+//                    node_index_1 = generate_random_unsigned(nodes_array_counter);
+//                    G->Delete_Node(nodes_array[node_index_1]);
+//                    if (deleted_node(nodes_keys_array[node_index_1],my_edge_array,edges_array_counter))
+//                    {
+//                        shift_nodes_arrays(nodes_array,nodes_keys_array,node_index_1,nodes_array_counter);
+//                        nodes_array_counter = nodes_array_counter - 1;
+//                    }
+//                }
+//                break;
+//            case DELETE_EDGE:
+//                if (edges_array_counter > 0)
+//                {
+//                    edge_index = generate_random_unsigned(edges_array_counter);
+//                    G->Delete_Edge(edges_array[edge_index]);
+//                    shift_edges_arrays(edges_array,my_edge_array,edge_index,edges_array_counter);
+//                    edges_array_counter = edges_array_counter - 1;
+//                }
+//                break;
+//            case STRONGLY_CONNECTED_COMPONENTS:
+//                T = G->SCC();
+//                cout<<"Print in layers after SCC:"<<"\n";
+//                T->Print_By_Layer(cout);
+//                cout<<"\n";
+//                cout<<"Preorder print after SCC:"<<"\n";
+//                T->Preorder_Print(cout);
+//                cout<<"\n";
+//                delete T;
+//                T=NULL;
+//                break;
+//            case RUN_BFS:
+//                if (nodes_array_counter > 0)
+//                {
+//                    node_index_1 = generate_random_unsigned(nodes_array_counter);
+//                    T = G->BFS(nodes_array[node_index_1]);
+//                    cout<<"Print in layers after BFS:"<<"\n";
+//                    T->Print_By_Layer(cout);
+//                    cout<<"\n";
+//                    cout<<"Preorder print after BFS:"<<"\n";
+//                    T->Preorder_Print(cout);
+//                    cout<<"\n";
+//                    delete T;
+//                    T=NULL;
+//                }
+//                break;
+//            case OUT_DEGREE:
+//                if (nodes_array_counter > 0) {
+//                    node_index_1 = generate_random_unsigned(nodes_array_counter);
+//                    cout<<"The out degree of node "<< nodes_array[node_index_1]->Get_key()<< " is " << nodes_array[node_index_1]->Get_out_Degree()<<"\n";
+//                }
+//                break;
+//            case IN_DEGREE:
+//                if (nodes_array_counter > 0) {
+//                    node_index_1 = generate_random_unsigned(nodes_array_counter);
+//                    cout<<"The in degree of node "<< nodes_array[node_index_1]->Get_key()<< " is " << nodes_array[node_index_1]->Get_in_Degree()<<"\n";
+//                }
+//                break;
+//        }
+//    }
     for (unsigned i = 0; i<edges_array_counter;i++ )
     {
         delete my_edge_array[i];
     }
     delete G;
-}*/
+}
