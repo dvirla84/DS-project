@@ -30,7 +30,6 @@ public:
     const unsigned getColor() const{return _color;}
     const unsigned getD() const{return _d;}
     const Graph_Node* getParent() const{return _parent;}
-    ~BFS_Aux_Info();
 };
 
 

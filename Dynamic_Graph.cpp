@@ -80,7 +80,7 @@ Rooted_Tree* Dynamic_Graph:: SCC() const {}
 //    }
 //}
 
-void Dynamic_Graph::BFS_init(BFS_Aux_Info** infoArr, Graph_Node* source)
+void Dynamic_Graph::BFS_init(BFS_Aux_Info** infoArr, Graph_Node* source) const
 {
     int nodesSize = _nodes->getSize();
     Graph_Node* node = _nodes->top();
@@ -88,7 +88,7 @@ void Dynamic_Graph::BFS_init(BFS_Aux_Info** infoArr, Graph_Node* source)
     {
         infoArr[node->getInsertionTime()] = new BFS_Aux_Info();
         infoArr[node->getInsertionTime()]->setSelf(node);
-        node = node->getSelfPointer()->_next->_item;
+        node = node->getSelfPointer()->getNext()->getItem();
     }
 
     infoArr[source->getInsertionTime()]->setColor(GREY);
@@ -99,7 +99,7 @@ void Dynamic_Graph::BFS_init(BFS_Aux_Info** infoArr, Graph_Node* source)
 Rooted_Tree*  Dynamic_Graph:: BFS(Graph_Node* source) const
 {
     BFS_Aux_Info** infoArr = new BFS_Aux_Info*[insertTime];
-
+    BFS_init(infoArr,source);
 
     for (int i = 0; i < insertTime; ++i) {
         delete infoArr[i];

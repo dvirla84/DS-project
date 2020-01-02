@@ -5,13 +5,15 @@
 
 template <typename T>class ListItem{
     template <typename U> friend class List;
-    friend class Dynamic_Graph;
 private:
     T _item;
     ListItem<T>* _next;
     ListItem<T>* _previous;
 public:
     ListItem(const T &_item):_item(_item),_next(NULL),_previous(NULL){};
+    const ListItem<T>* getNext() const{ return _next;}
+    const ListItem<T>* getPrevious() const{return _previous;}
+    const T getItem() const{return _item;}
     ~ListItem(){};
 };
 

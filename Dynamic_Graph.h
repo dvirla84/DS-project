@@ -21,7 +21,7 @@ public:
     Graph_Edge* Insert_Edge(Graph_Node* from, Graph_Node* to);
     void Delete_Edge(Graph_Edge* edge);
     Rooted_Tree* SCC() const;
-    void BFS_init(BFS_Aux_Info** infoArr, Graph_Node* source);
+    void BFS_init(BFS_Aux_Info** infoArr, Graph_Node* source) const;
     Rooted_Tree* BFS(Graph_Node* source) const;
 
 
