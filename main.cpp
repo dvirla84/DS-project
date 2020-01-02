@@ -7,16 +7,24 @@
 #define TEST_SIZE 30
 #define INITIAL_NODES_NUM 10
 #define INITIAL_EDGES_NUM 30
-#define NUM_OF_OPERATIONS 8
+//#define NUM_OF_OPERATIONS 8
+//#define INSERT_NODE 1
+//#define INSERT_EDGE 2
+//#define DELETE_NODE 3
+//#define DELETE_EDGE 4
+//#define STRONGLY_CONNECTED_COMPONENTS 5
+//#define RUN_BFS 6
+//#define OUT_DEGREE 7
+//#define IN_DEGREE 8
+
+#define NUM_OF_OPERATIONS 7
 #define INSERT_NODE 1
 #define INSERT_EDGE 2
 #define DELETE_NODE 3
 #define DELETE_EDGE 4
-#define STRONGLY_CONNECTED_COMPONENTS 5
-#define RUN_BFS 6
-#define OUT_DEGREE 7
-#define IN_DEGREE 8
-
+#define RUN_BFS 5
+#define OUT_DEGREE 6
+#define IN_DEGREE 7
 using namespace std;
 
 //change get functions to const!!!!!!
@@ -151,50 +159,50 @@ int main()
 
     unsigned edge_index;
 
-//    Rooted_Tree* T = NULL;
-//
-//    for (unsigned i = 0;i < TEST_SIZE;i++)
-//    {
-//        operation = generate_random_unsigned(NUM_OF_OPERATIONS)+1;
-//        switch (operation)
-//        {
-//            case INSERT_NODE:
-//                nodes_array[nodes_array_counter] = G->Insert_Node(node_key);
-//                nodes_keys_array[nodes_array_counter] = node_key;
-//                nodes_array_counter = nodes_array_counter + 1;
-//                node_key = node_key + 1;
-//                break;
-//            case INSERT_EDGE:
-//                node_index_1 = generate_random_unsigned(nodes_array_counter);
-//                node_index_2 = generate_random_unsigned(nodes_array_counter);
-//                if (node_index_1 != node_index_2 && edge_does_not_exists(my_edge_array,edges_array_counter,nodes_keys_array[node_index_1],nodes_keys_array[node_index_2]))
-//                {
-//                    edges_array[edges_array_counter] = G->Insert_Edge(nodes_array[node_index_1],nodes_array[node_index_2]);
-//                    my_edge_array[edges_array_counter] = new My_Edge(nodes_keys_array[node_index_1],nodes_keys_array[node_index_2]);
-//                    edges_array_counter = edges_array_counter + 1;
-//                }
-//                break;
-//            case DELETE_NODE:
-//                if (nodes_array_counter > 0)
-//                {
-//                    node_index_1 = generate_random_unsigned(nodes_array_counter);
-//                    G->Delete_Node(nodes_array[node_index_1]);
-//                    if (deleted_node(nodes_keys_array[node_index_1],my_edge_array,edges_array_counter))
-//                    {
-//                        shift_nodes_arrays(nodes_array,nodes_keys_array,node_index_1,nodes_array_counter);
-//                        nodes_array_counter = nodes_array_counter - 1;
-//                    }
-//                }
-//                break;
-//            case DELETE_EDGE:
-//                if (edges_array_counter > 0)
-//                {
-//                    edge_index = generate_random_unsigned(edges_array_counter);
-//                    G->Delete_Edge(edges_array[edge_index]);
-//                    shift_edges_arrays(edges_array,my_edge_array,edge_index,edges_array_counter);
-//                    edges_array_counter = edges_array_counter - 1;
-//                }
-//                break;
+    Rooted_Tree* T = NULL;
+
+  //  for (unsigned i = 0;i < TEST_SIZE;i++)
+    {
+        operation = RUN_BFS;
+        switch (operation)
+        {
+            case INSERT_NODE:
+                nodes_array[nodes_array_counter] = G->Insert_Node(node_key);
+                nodes_keys_array[nodes_array_counter] = node_key;
+                nodes_array_counter = nodes_array_counter + 1;
+                node_key = node_key + 1;
+                break;
+            case INSERT_EDGE:
+                node_index_1 = generate_random_unsigned(nodes_array_counter);
+                node_index_2 = generate_random_unsigned(nodes_array_counter);
+                if (node_index_1 != node_index_2 && edge_does_not_exists(my_edge_array,edges_array_counter,nodes_keys_array[node_index_1],nodes_keys_array[node_index_2]))
+                {
+                    edges_array[edges_array_counter] = G->Insert_Edge(nodes_array[node_index_1],nodes_array[node_index_2]);
+                    my_edge_array[edges_array_counter] = new My_Edge(nodes_keys_array[node_index_1],nodes_keys_array[node_index_2]);
+                    edges_array_counter = edges_array_counter + 1;
+                }
+                break;
+            case DELETE_NODE:
+                if (nodes_array_counter > 0)
+                {
+                    node_index_1 = generate_random_unsigned(nodes_array_counter);
+                    G->Delete_Node(nodes_array[node_index_1]);
+                    if (deleted_node(nodes_keys_array[node_index_1],my_edge_array,edges_array_counter))
+                    {
+                        shift_nodes_arrays(nodes_array,nodes_keys_array,node_index_1,nodes_array_counter);
+                        nodes_array_counter = nodes_array_counter - 1;
+                    }
+                }
+                break;
+            case DELETE_EDGE:
+                if (edges_array_counter > 0)
+                {
+                    edge_index = generate_random_unsigned(edges_array_counter);
+                    G->Delete_Edge(edges_array[edge_index]);
+                    shift_edges_arrays(edges_array,my_edge_array,edge_index,edges_array_counter);
+                    edges_array_counter = edges_array_counter - 1;
+                }
+                break;
 //            case STRONGLY_CONNECTED_COMPONENTS:
 //                T = G->SCC();
 //                cout<<"Print in layers after SCC:"<<"\n";
@@ -206,35 +214,35 @@ int main()
 //                delete T;
 //                T=NULL;
 //                break;
-//            case RUN_BFS:
-//                if (nodes_array_counter > 0)
-//                {
-//                    node_index_1 = generate_random_unsigned(nodes_array_counter);
-//                    T = G->BFS(nodes_array[node_index_1]);
-//                    cout<<"Print in layers after BFS:"<<"\n";
-//                    T->Print_By_Layer(cout);
-//                    cout<<"\n";
-//                    cout<<"Preorder print after BFS:"<<"\n";
-//                    T->Preorder_Print(cout);
-//                    cout<<"\n";
-//                    delete T;
-//                    T=NULL;
-//                }
-//                break;
-//            case OUT_DEGREE:
-//                if (nodes_array_counter > 0) {
-//                    node_index_1 = generate_random_unsigned(nodes_array_counter);
-//                    cout<<"The out degree of node "<< nodes_array[node_index_1]->Get_key()<< " is " << nodes_array[node_index_1]->Get_out_Degree()<<"\n";
-//                }
-//                break;
-//            case IN_DEGREE:
-//                if (nodes_array_counter > 0) {
-//                    node_index_1 = generate_random_unsigned(nodes_array_counter);
-//                    cout<<"The in degree of node "<< nodes_array[node_index_1]->Get_key()<< " is " << nodes_array[node_index_1]->Get_in_Degree()<<"\n";
-//                }
-//                break;
-//        }
-//    }
+            case RUN_BFS:
+                if (nodes_array_counter > 0)
+                {
+                    node_index_1 = generate_random_unsigned(nodes_array_counter);
+                    T = G->BFS(nodes_array[node_index_1]);
+                    cout<<"Print in layers after BFS:"<<"\n";
+                    T->Print_By_Layer(cout);
+                    cout<<"\n";
+                    cout<<"Preorder print after BFS:"<<"\n";
+                    T->Preorder_Print(cout);
+                    cout<<"\n";
+                    delete T;
+                    T=NULL;
+                }
+                break;
+            case OUT_DEGREE:
+                if (nodes_array_counter > 0) {
+                    node_index_1 = generate_random_unsigned(nodes_array_counter);
+                    cout<<"The out degree of node "<< nodes_array[node_index_1]->Get_key()<< " is " << nodes_array[node_index_1]->Get_out_Degree()<<"\n";
+                }
+                break;
+            case IN_DEGREE:
+                if (nodes_array_counter > 0) {
+                    node_index_1 = generate_random_unsigned(nodes_array_counter);
+                    cout<<"The in degree of node "<< nodes_array[node_index_1]->Get_key()<< " is " << nodes_array[node_index_1]->Get_in_Degree()<<"\n";
+                }
+                break;
+        }
+    }
     for (unsigned i = 0; i<edges_array_counter;i++ )
     {
         delete my_edge_array[i];

@@ -64,10 +64,10 @@ void Dynamic_Graph::BFS_init(unsigned* colorArr, Graph_Node* source, List<Graph_
 {
     int nodesSize = _nodes->getSize();
     Graph_Node* node = _nodes->top();
-    for (int i = 0; i < nodesSize; ++i)
+    for (int i = 0; i < nodesSize-1; ++i)
     {
         colorArr[node->getInsertionTime()] = WHITE;
-        node = node->getSelfPointer()->getNext()->getItem();
+        node = node->getSelfPointer()->getPrevious()->getItem();
     }
 
     colorArr[source->getInsertionTime()] = (GRAY);
@@ -90,6 +90,7 @@ Rooted_Tree*  Dynamic_Graph:: BFS(Graph_Node* source) const
         Graph_Node* u = graphQueue->popBack();
         Tree_Node* parent = treeQueue->popBack();
         unsigned outSize = u->Get_out_Degree();
+        if(u->getOutList()->getSize() == 0) return rootedTree;
         Graph_Edge* u_v = u->getOutList()->top();
         Graph_Node* v = u_v->getTo();
         Tree_Node* rightestSibling = new Tree_Node(v->Get_key());
@@ -97,14 +98,14 @@ Rooted_Tree*  Dynamic_Graph:: BFS(Graph_Node* source) const
         rightestSibling->setParent(parent);
         treeQueue->pushFront(rightestSibling);
 
-        for (unsigned i = 0; i < outSize ; i++)
+        for (unsigned i = 0; i < outSize-1 ; i++)
         {
             if(colorArr[v->getInsertionTime()] == WHITE)
             {
                 colorArr[v->getInsertionTime()] = GRAY;
                 graphQueue->pushFront(v);
             }
-            u_v = u_v->getOutPointer()->getNext()->getItem();
+            u_v = u_v->getOutPointer()->getPrevious()->getItem();
             v = u_v->getTo();
             if(i != 0)
             {
@@ -116,12 +117,9 @@ Rooted_Tree*  Dynamic_Graph:: BFS(Graph_Node* source) const
             }
         }
         colorArr[u->getInsertionTime()] = (BLACK);
-
     }
-
-
-
     delete graphQueue;
     delete treeQueue;
     delete[] colorArr;
+    return rootedTree;
 }
