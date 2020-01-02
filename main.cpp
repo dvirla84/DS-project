@@ -19,6 +19,7 @@
 
 using namespace std;
 
+//change get functions to const!!!!!!
 
 class My_Edge
 {

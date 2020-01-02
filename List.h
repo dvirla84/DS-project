@@ -5,6 +5,7 @@
 
 template <typename T>class ListItem{
     template <typename U> friend class List;
+    friend class Dynamic_Graph;
 private:
     T _item;
     ListItem<T>* _next;

@@ -10,17 +10,21 @@
 class Graph_Node: public Node {
 private:
     ListItem<Graph_Node*>* _selfPointer;
+    unsigned _insertionTime;
     List<Graph_Edge*>* _outList;
     unsigned _inCounter;
 public:
     Graph_Node(unsigned key);
-    Graph_Node(Graph_Node* other);
     void setSelfPointer(ListItem<Graph_Node*>* selfPointer);
     unsigned Get_out_Degree() const {return _outList->getSize();}
     unsigned Get_in_Degree() const {return _inCounter;}
     ListItem<Graph_Node*>* getSelfPointer() const{return _selfPointer;}
     void eraseOutEdge(ListItem<Graph_Edge*>* listItem){_outList->erase(listItem);}
     ListItem<Graph_Edge*>* insertOutEdge(Graph_Edge* edge) {return _outList->pushFront(edge);}
+    void increaseInDegree(){_inCounter++;}
+    void decreaseInDegree(){_inCounter--;}
+    void setInsertionTime(unsigned t){_insertionTime = t;}
+    const unsigned getInsertionTime(){return _insertionTime;}
     ~Graph_Node();
 };
 
