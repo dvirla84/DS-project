@@ -117,7 +117,7 @@ Rooted_Tree*  Dynamic_Graph:: BFS(Graph_Node* source) const
         Tree_Node* rightestSibling = new Tree_Node(v->Get_key());
         parent->setLeftChild(rightestSibling);
         rightestSibling->setParent(parent);
-
+        treeQueue->pushFront(rightestSibling);
         for (unsigned i = 0; i < outSize ; i++)
         {
             if(infoArr[v->getInsertionTime()]->getColor() == WHITE)
@@ -135,6 +135,7 @@ Rooted_Tree*  Dynamic_Graph:: BFS(Graph_Node* source) const
                 brother->setParent(parent);
                 rightestSibling->setRightSibling(brother);
                 rightestSibling = brother;
+                treeQueue->pushFront(rightestSibling);
             }
         }
         infoArr[u->getInsertionTime()]->setColor(BLACK);
