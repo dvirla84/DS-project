@@ -1,8 +1,9 @@
 #include "Dynamic_Graph.h"
 
 Dynamic_Graph::Dynamic_Graph():
-        _nodes(new List<Graph_Node*>),
-        _edges(new List<Graph_Edge*>)
+        _edges(new List<Graph_Edge*>),
+        _nodes(new List<Graph_Node*>)
+
 {}
 
 Dynamic_Graph:: ~Dynamic_Graph()
@@ -24,7 +25,7 @@ Dynamic_Graph:: ~Dynamic_Graph()
 Graph_Node* Dynamic_Graph:: Insert_Node(unsigned node_key)
 {
     Graph_Node* node = new Graph_Node(node_key);
-    node->setSelfPointer(_nodes->pushBack(node));
+    node->setSelfPointer(_nodes->pushFront(node));
     return node;
 }
 
@@ -37,7 +38,7 @@ void Dynamic_Graph::  Delete_Node(Graph_Node* node)
 Graph_Edge* Dynamic_Graph:: Insert_Edge(Graph_Node* from, Graph_Node* to)
 {
     Graph_Edge* edge = new Graph_Edge(from, to);
-    edge->setSelfPointer(_edges->pushBack(edge));
+    edge->setSelfPointer(_edges->pushFront(edge));
     edge->setOutPointer(from->insertOutEdge(edge));
 }
 
@@ -52,4 +53,9 @@ void Dynamic_Graph:: Delete_Edge(Graph_Edge* edge)
 
 Rooted_Tree* Dynamic_Graph:: SCC() const {}
 
-Rooted_Tree*  Dynamic_Graph:: BFS(Graph_Node* source) const{}
+
+
+Rooted_Tree*  Dynamic_Graph:: BFS(Graph_Node* source) const
+{
+
+}

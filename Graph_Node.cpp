@@ -6,6 +6,12 @@ Graph_Node::Graph_Node(unsigned key):
         _outList(new List<Graph_Edge*>),
         _inCounter(0){}
 
+Graph_Node::Graph_Node(Graph_Node* other):
+Node(other->_key),
+_selfPointer()
+{}
+
+
 Graph_Node:: ~Graph_Node()
 {
     delete _outList;

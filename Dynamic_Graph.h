@@ -5,11 +5,13 @@
 #include "Graph_Node.h"
 #include "Graph_Edge.h"
 #include "Rooted_Tree.h"
+#include "BFS_Node.h"
 
 class Dynamic_Graph {
 private:
-    List<Graph_Node*> *_nodes;
     List<Graph_Edge*> *_edges;
+    List<Graph_Node*> *_nodes;
+
 
 public:
     Dynamic_Graph();
@@ -19,6 +21,7 @@ public:
     Graph_Edge* Insert_Edge(Graph_Node* from, Graph_Node* to);
     void Delete_Edge(Graph_Edge* edge);
     Rooted_Tree* SCC() const;
+    void BFS_init(List<BFS_Node*>*)
     Rooted_Tree* BFS(Graph_Node* source) const;
 
 

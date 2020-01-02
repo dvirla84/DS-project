@@ -25,7 +25,7 @@ public:
     void setParent(Tree_Node *newParent);
     void setLeftChild(Tree_Node *newChild);
     void setRightSibling(Tree_Node *newSibling);
-    ~Tree_Node(){};
+    ~Tree_Node();
 };
 
 
