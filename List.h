@@ -121,7 +121,7 @@ public:
         _size--;
     }
 
-    T top()
+    T top () const
     {
         return _head->_item;
     }

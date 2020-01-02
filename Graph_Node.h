@@ -19,6 +19,8 @@ public:
     unsigned Get_out_Degree() const {return _outList->getSize();}
     unsigned Get_in_Degree() const {return _inCounter;}
     ListItem<Graph_Node*>* getSelfPointer() const{return _selfPointer;}
+    const List<Graph_Edge*>* getOutList() const{return _outList;}
+
     void eraseOutEdge(ListItem<Graph_Edge*>* listItem){_outList->erase(listItem);}
     ListItem<Graph_Edge*>* insertOutEdge(Graph_Edge* edge) {return _outList->pushFront(edge);}
     void increaseInDegree(){_inCounter++;}
