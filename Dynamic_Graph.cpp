@@ -60,48 +60,26 @@ void Dynamic_Graph:: Delete_Edge(Graph_Edge* edge)
 Rooted_Tree* Dynamic_Graph:: SCC() const {}
 
 
-//void Dynamic_Graph::BFS_init(List<BFS_Aux_Info*> *BFS_nodes, List<BFS_DFS_Edge*> *BFS_edges)
-//{
-//    int nodesSize = _nodes->getSize();
-//    Graph_Node* toCopyNode = _nodes->top();
-//    for (int i = 0; i < nodesSize; ++i)
-//    {
-//        BFS_Aux_Info* copied = new BFS_DFS_Node(toCopyNode->Get_key());
-//        copied->setSelfPointer(BFS_nodes->pushBack(copied));
-//        toCopyNode = toCopyNode->getSelfPointer()->_next->_item;
-//    }
-//
-//    int edgesSize = _edges->getSize();
-//    Graph_Edge* toCopyEdge = _edges->top();
-//    for (int j = 0; j < edgesSize; ++j)
-//    {
-//        BFS_DFS_Edge* copied = new BFS_DFS_Edge(toCopyEdge->getFrom(), toCopyEdge->getTo());
-//
-//    }
-//}
-
-void Dynamic_Graph::BFS_init(BFS_Aux_Info** infoArr, Graph_Node* source, List<Graph_Node*> *graphQueue) const
+void Dynamic_Graph::BFS_init(unsigned* colorArr, Graph_Node* source, List<Graph_Node*> *graphQueue) const
 {
     int nodesSize = _nodes->getSize();
     Graph_Node* node = _nodes->top();
     for (int i = 0; i < nodesSize; ++i)
     {
-        infoArr[node->getInsertionTime()] = new BFS_Aux_Info();
-        infoArr[node->getInsertionTime()]->setSelf(node);
+        colorArr[node->getInsertionTime()] = WHITE;
         node = node->getSelfPointer()->getNext()->getItem();
     }
 
-    infoArr[source->getInsertionTime()]->setColor(GRAY);
-    infoArr[source->getInsertionTime()]->setD(0);
+    colorArr[source->getInsertionTime()] = (GRAY);
     graphQueue->pushFront(source);
 }
 
 Rooted_Tree*  Dynamic_Graph:: BFS(Graph_Node* source) const
 {
-    BFS_Aux_Info** infoArr = new BFS_Aux_Info*[insertTime];
+    unsigned* colorArr = new unsigned[insertTime];
     List<Graph_Node*>* graphQueue = new List<Graph_Node*>;
     List<Tree_Node*>* treeQueue = new List<Tree_Node*>;
-    BFS_init(infoArr,source, graphQueue);
+    BFS_init(colorArr,source, graphQueue);
     Tree_Node* root = new Tree_Node(source->Get_key());
     Rooted_Tree* rootedTree = new Rooted_Tree();
     rootedTree->setRoot(root);
@@ -118,13 +96,12 @@ Rooted_Tree*  Dynamic_Graph:: BFS(Graph_Node* source) const
         parent->setLeftChild(rightestSibling);
         rightestSibling->setParent(parent);
         treeQueue->pushFront(rightestSibling);
+
         for (unsigned i = 0; i < outSize ; i++)
         {
-            if(infoArr[v->getInsertionTime()]->getColor() == WHITE)
+            if(colorArr[v->getInsertionTime()] == WHITE)
             {
-                infoArr[v->getInsertionTime()]->setColor(GRAY);
-                infoArr[v->getInsertionTime()]->setD(infoArr[u->getInsertionTime()]->getD()+1);
-                infoArr[v->getInsertionTime()]->setParent(u);
+                colorArr[v->getInsertionTime()] = GRAY;
                 graphQueue->pushFront(v);
             }
             u_v = u_v->getOutPointer()->getNext()->getItem();
@@ -138,7 +115,7 @@ Rooted_Tree*  Dynamic_Graph:: BFS(Graph_Node* source) const
                 treeQueue->pushFront(rightestSibling);
             }
         }
-        infoArr[u->getInsertionTime()]->setColor(BLACK);
+        colorArr[u->getInsertionTime()] = (BLACK);
 
     }
 
@@ -146,8 +123,5 @@ Rooted_Tree*  Dynamic_Graph:: BFS(Graph_Node* source) const
 
     delete graphQueue;
     delete treeQueue;
-    for (int i = 0; i < insertTime; ++i) {
-        delete infoArr[i];
-    }
-    delete[] infoArr;
+    delete[] colorArr;
 }
