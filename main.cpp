@@ -218,7 +218,7 @@ int main()
                 if (nodes_array_counter > 0)
                 {
                     node_index_1 = generate_random_unsigned(nodes_array_counter);
-                    T = G->BFS2(nodes_array[node_index_1]);
+                    T = G->BFS(nodes_array[node_index_1]);
                     cout<<"Print in layers after BFS:"<<"\n";
                     T->Print_By_Layer(cout);
                     cout<<"\n";
