@@ -26,7 +26,7 @@ public:
     void increaseInDegree(){_inCounter++;}
     void decreaseInDegree(){_inCounter--;}
     void setInsertionTime(unsigned t){_insertionTime = t;}
-    const unsigned getInsertionTime(){return _insertionTime;}
+    unsigned getInsertionTime(){return _insertionTime;}
     ~Graph_Node();
 };
 

@@ -13,7 +13,7 @@ class Dynamic_Graph {
 private:
     List<Graph_Edge*> *_edges;
     List<Graph_Node*> *_nodes;
-
+    unsigned _insertTime;
 
 public:
     Dynamic_Graph();

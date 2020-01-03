@@ -5,8 +5,8 @@
 
 #define SEED 23454
 #define TEST_SIZE 30
-#define INITIAL_NODES_NUM 10
-#define INITIAL_EDGES_NUM 30
+#define INITIAL_NODES_NUM 5
+#define INITIAL_EDGES_NUM 9
 //#define NUM_OF_OPERATIONS 8
 //#define INSERT_NODE 1
 //#define INSERT_EDGE 2
@@ -122,8 +122,8 @@ int main()
         nodes_array_counter = nodes_array_counter + 1;
         node_key = node_key + 1;
     }
-    cout<<"The out degree of node "<< nodes_array[2]->Get_key()<< " is " << nodes_array[2]->Get_out_Degree()<<"\n";
-    cout<<"The in degree of node "<< nodes_array[6]->Get_key()<< " is " << nodes_array[6]->Get_in_Degree()<<"\n";
+//    cout<<"The out degree of node "<< nodes_array[2]->Get_key()<< " is " << nodes_array[2]->Get_out_Degree()<<"\n";
+//    cout<<"The in degree of node "<< nodes_array[6]->Get_key()<< " is " << nodes_array[6]->Get_in_Degree()<<"\n";
     delete G;
 
     for (unsigned i =0;i<INITIAL_NODES_NUM;i++)
