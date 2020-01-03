@@ -5,8 +5,8 @@
 
 #define SEED 23454
 #define TEST_SIZE 30
-#define INITIAL_NODES_NUM 5
-#define INITIAL_EDGES_NUM 9
+#define INITIAL_NODES_NUM 10
+#define INITIAL_EDGES_NUM 30
 //#define NUM_OF_OPERATIONS 8
 //#define INSERT_NODE 1
 //#define INSERT_EDGE 2

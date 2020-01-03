@@ -62,14 +62,35 @@ void Rooted_Tree::Print_By_Layer(std::ostream & stream) const
         while (temp->getRightSibling()!=NULL)
         {
             stream << ",";
-            if (temp->getLeftChild() != NULL) leftChildren->pushFront(temp->getLeftChild());
             temp = temp->getRightSibling();
+            if (temp->getLeftChild() != NULL) leftChildren->pushFront(temp->getLeftChild());
             stream << temp->Get_key();
         }
         stream << "\n";
     }
     delete leftChildren;
 }
+//void Rooted_Tree::Preorder_Print(std::ostream & stream) const
+//{
+//    List<Tree_Node*> *rightSiblings = new List<Tree_Node*>;
+//    Tree_Node *x = this->_root;
+//    rightSiblings->pushFront(x);
+//    while (rightSiblings->getSize() > 0)
+//    {
+//        Tree_Node *temp = rightSiblings->popFront();
+//        if(temp->getLeftChild()!=NULL) stream << temp->Get_key()<< ",";
+//        else stream << temp->Get_key();
+//        if (temp->getRightSibling() != NULL) rightSiblings->pushFront(temp->getRightSibling());
+//        while (temp->getLeftChild()!=NULL)
+//        {
+//            temp = temp->getLeftChild();
+//            if (temp->getRightSibling() != NULL) rightSiblings->pushFront(temp->getRightSibling());
+//            stream  << temp->Get_key() << "," ;
+//        }
+//    }
+//    delete rightSiblings;
+//}
+
 void Rooted_Tree::Preorder_Print(std::ostream & stream) const
 {
     List<Tree_Node*> *rightSiblings = new List<Tree_Node*>;
@@ -78,14 +99,15 @@ void Rooted_Tree::Preorder_Print(std::ostream & stream) const
     while (rightSiblings->getSize() > 0)
     {
         Tree_Node *temp = rightSiblings->popFront();
-        if(temp->getLeftChild()!=NULL) stream << temp->Get_key()<< ",";
-        else stream << temp->Get_key();
+        stream << temp->Get_key()<< ",";
+//        else stream << temp->Get_key();
         if (temp->getRightSibling() != NULL) rightSiblings->pushFront(temp->getRightSibling());
         while (temp->getLeftChild()!=NULL)
         {
             temp = temp->getLeftChild();
             if (temp->getRightSibling() != NULL) rightSiblings->pushFront(temp->getRightSibling());
-            stream  << temp->Get_key() << "," ;
+            if(rightSiblings->getSize()>0) stream  << temp->Get_key() << "," ;
+            else stream  << temp->Get_key();
         }
     }
     delete rightSiblings;
