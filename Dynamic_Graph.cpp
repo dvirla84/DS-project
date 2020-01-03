@@ -97,9 +97,9 @@ Rooted_Tree*  Dynamic_Graph:: BFS(Graph_Node* source) const
         for(int i = 0; i < outSize ; i++)
         {
             if (colorArr[v->getInsertionTime()] != WHITE) {
-                if(u_v->getSelfPointer()->getPrevious()!= NULL)
+                if(u_v->getOutPointer()->getPrevious()!= NULL)
                 {
-                    u_v = u_v->getSelfPointer()->getPrevious()->getItem();
+                    u_v = u_v->getOutPointer()->getPrevious()->getItem();
                     v = u_v->getTo();
                 }
                 continue;
@@ -121,9 +121,9 @@ Rooted_Tree*  Dynamic_Graph:: BFS(Graph_Node* source) const
             }
             colorArr[v->getInsertionTime()] = GRAY;
             graphQueue->pushFront(v);
-            if(u_v->getSelfPointer()->getPrevious()!= NULL)
+            if(u_v->getOutPointer()->getPrevious()!= NULL)
             {
-                u_v = u_v->getSelfPointer()->getPrevious()->getItem();
+                u_v = u_v->getOutPointer()->getPrevious()->getItem();
                 v = u_v->getTo();
             }
 
