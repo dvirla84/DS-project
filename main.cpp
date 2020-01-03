@@ -219,12 +219,6 @@ int main()
                 {
                     node_index_1 = generate_random_unsigned(nodes_array_counter);
                     T = G->BFS(nodes_array[node_index_1]);
-                    for (int i = 0; i < 30; ++i) {
-                        cout<< edges_array[i]->getFrom()->Get_key();
-                        cout<< "->";
-                        cout<< edges_array[i]->getTo()->Get_key() << endl;
-
-                    }
                     cout<<"Print in layers after BFS:"<<"\n";
                     T->Print_By_Layer(cout);
                     cout<<"\n";

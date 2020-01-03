@@ -56,18 +56,23 @@ void Rooted_Tree::Print_By_Layer(std::ostream & stream) const
     leftChildren->pushFront(x);
     while (leftChildren->getSize() > 0)
     {
-        Tree_Node *temp = leftChildren->popBack();
-        stream << temp->Get_key();
-        if (temp->getLeftChild() != NULL) leftChildren->pushFront(temp->getLeftChild());
-        while (temp->getRightSibling()!=NULL)
+        unsigned leftChildrenSize = leftChildren->getSize();
+        for (int i = 0; i < leftChildrenSize; ++i)
         {
-            stream << ",";
-            temp = temp->getRightSibling();
-            if (temp->getLeftChild() != NULL) leftChildren->pushFront(temp->getLeftChild());
+            if(i!=0) stream << ",";
+            Tree_Node *temp = leftChildren->popBack();
             stream << temp->Get_key();
+            if (temp->getLeftChild() != NULL) leftChildren->pushFront(temp->getLeftChild());
+            while (temp->getRightSibling() != NULL) {
+                stream << ",";
+                temp = temp->getRightSibling();
+                if (temp->getLeftChild() != NULL) leftChildren->pushFront(temp->getLeftChild());
+                stream << temp->Get_key();
+            }
         }
         stream << "\n";
     }
+
     delete leftChildren;
 }
 //void Rooted_Tree::Preorder_Print(std::ostream & stream) const
