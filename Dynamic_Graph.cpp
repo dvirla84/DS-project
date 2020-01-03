@@ -94,9 +94,22 @@ Rooted_Tree*  Dynamic_Graph:: BFS(Graph_Node* source) const
         if(outSize == 0) continue;
         Graph_Edge* u_v = u->getOutList()->top();
         Graph_Node* v = u_v->getTo();
+        int counter = 0;
+        while(colorArr[v->getInsertionTime()] != WHITE)
+        {
+            if(u_v->getOutPointer()->getPrevious() != NULL)
+            {
+                u_v = u_v->getOutPointer()->getPrevious()->getItem();
+                v = u_v->getTo();
+                counter++;
+            }
+            else break;
+        }
         Tree_Node* rightestSibling = new Tree_Node(v->Get_key());
+        if(counter == outSize)
+            delete rightestSibling;
 
-        for (unsigned i = 0; i < outSize ; i++)
+        for (unsigned i = counter; i < outSize ; i++)
         {
             if(colorArr[v->getInsertionTime()] == WHITE)
             {
