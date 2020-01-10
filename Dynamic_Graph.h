@@ -22,6 +22,7 @@ public:
     void Delete_Node(Graph_Node* node);
     Graph_Edge* Insert_Edge(Graph_Node* from, Graph_Node* to);
     void Delete_Edge(Graph_Edge* edge);
+//    void DFS(List<Graph_Node*>* seq)
     Rooted_Tree* SCC() const;
     void BFS_init(unsigned* colorArr, Graph_Node* source, List<Graph_Node*> *graphQueue) const;
     Rooted_Tree* BFS(Graph_Node* source) const;

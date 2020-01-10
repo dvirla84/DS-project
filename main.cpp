@@ -7,27 +7,18 @@
 #define TEST_SIZE 30
 #define INITIAL_NODES_NUM 10
 #define INITIAL_EDGES_NUM 30
-//#define NUM_OF_OPERATIONS 8
-//#define INSERT_NODE 1
-//#define INSERT_EDGE 2
-//#define DELETE_NODE 3
-//#define DELETE_EDGE 4
-//#define STRONGLY_CONNECTED_COMPONENTS 5
-//#define RUN_BFS 6
-//#define OUT_DEGREE 7
-//#define IN_DEGREE 8
-
-#define NUM_OF_OPERATIONS 7
+#define NUM_OF_OPERATIONS 8
 #define INSERT_NODE 1
 #define INSERT_EDGE 2
 #define DELETE_NODE 3
 #define DELETE_EDGE 4
-#define RUN_BFS 5
-#define OUT_DEGREE 6
-#define IN_DEGREE 7
+#define STRONGLY_CONNECTED_COMPONENTS 5
+#define RUN_BFS 6
+#define OUT_DEGREE 7
+#define IN_DEGREE 8
+
 using namespace std;
 
-//change get functions to const!!!!!!
 
 class My_Edge
 {
@@ -122,8 +113,8 @@ int main()
         nodes_array_counter = nodes_array_counter + 1;
         node_key = node_key + 1;
     }
-//    cout<<"The out degree of node "<< nodes_array[2]->Get_key()<< " is " << nodes_array[2]->Get_out_Degree()<<"\n";
-//    cout<<"The in degree of node "<< nodes_array[6]->Get_key()<< " is " << nodes_array[6]->Get_in_Degree()<<"\n";
+    cout<<"The out degree of node "<< nodes_array[2]->Get_key()<< " is " << nodes_array[2]->Get_out_Degree()<<"\n";
+    cout<<"The in degree of node "<< nodes_array[6]->Get_key()<< " is " << nodes_array[6]->Get_in_Degree()<<"\n";
     delete G;
 
     for (unsigned i =0;i<INITIAL_NODES_NUM;i++)
@@ -161,10 +152,15 @@ int main()
 
     Rooted_Tree* T = NULL;
 
-  //  for (unsigned i = 0;i < TEST_SIZE;i++)
+
+    for (unsigned i = 0;i < TEST_SIZE;i++)
     {
-        operation = RUN_BFS;
-        switch (operation)
+//        for (int j = 0; j < edges_array_counter; ++j) {
+//            cout << edges_array[j]->getFrom()->Get_key() << "->" << edges_array[j]->getTo()->Get_key() << endl;
+//        }
+//        cout<< endl;
+        operation = generate_random_unsigned(NUM_OF_OPERATIONS)+1;
+            switch (operation)
         {
             case INSERT_NODE:
                 nodes_array[nodes_array_counter] = G->Insert_Node(node_key);

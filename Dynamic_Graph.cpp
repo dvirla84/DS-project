@@ -34,6 +34,8 @@ Graph_Node* Dynamic_Graph:: Insert_Node(unsigned node_key)
 
 void Dynamic_Graph::  Delete_Node(Graph_Node* node)
 {
+    if(node->Get_out_Degree()>0 || node->Get_in_Degree()>0)
+        return;
     _nodes->erase(node->getSelfPointer());
     delete node;
 }
@@ -57,7 +59,10 @@ void Dynamic_Graph:: Delete_Edge(Graph_Edge* edge)
 }
 
 
-Rooted_Tree* Dynamic_Graph:: SCC() const {}
+Rooted_Tree* Dynamic_Graph:: SCC() const
+{
+
+}
 
 
 void Dynamic_Graph::BFS_init(unsigned* colorArr, Graph_Node* source, List<Graph_Node*> *graphQueue) const
@@ -90,8 +95,10 @@ Rooted_Tree*  Dynamic_Graph:: BFS(Graph_Node* source) const
     {
         Graph_Node *u = graphQueue->popBack();
         Tree_Node *parent = treeQueue->popBack();
+        unsigned outSize =u->Get_out_Degree();
+        if(outSize == 0)
+            continue;
         Graph_Edge *u_v = u->getOutList()->top();
-        unsigned outSize =u->getOutList()->getSize();
         Tree_Node *rightestSibling;
         Graph_Node *v = u_v->getTo();
         for(int i = 0; i < outSize ; i++)
