@@ -125,6 +125,10 @@ public:
     {
         return _head->_item;
     }
+    T back () const
+    {
+        return _tail->_item;
+    }
 
     unsigned getSize() const{
         return _size;

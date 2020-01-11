@@ -152,15 +152,10 @@ int main()
 
     Rooted_Tree* T = NULL;
 
-
     for (unsigned i = 0;i < TEST_SIZE;i++)
     {
-//        for (int j = 0; j < edges_array_counter; ++j) {
-//            cout << edges_array[j]->getFrom()->Get_key() << "->" << edges_array[j]->getTo()->Get_key() << endl;
-//        }
-//        cout<< endl;
         operation = generate_random_unsigned(NUM_OF_OPERATIONS)+1;
-            switch (operation)
+        switch (operation)
         {
             case INSERT_NODE:
                 nodes_array[nodes_array_counter] = G->Insert_Node(node_key);
@@ -199,17 +194,18 @@ int main()
                     edges_array_counter = edges_array_counter - 1;
                 }
                 break;
-//            case STRONGLY_CONNECTED_COMPONENTS:
-//                T = G->SCC();
-//                cout<<"Print in layers after SCC:"<<"\n";
-//                T->Print_By_Layer(cout);
-//                cout<<"\n";
-//                cout<<"Preorder print after SCC:"<<"\n";
-//                T->Preorder_Print(cout);
-//                cout<<"\n";
-//                delete T;
-//                T=NULL;
-//                break;
+            case STRONGLY_CONNECTED_COMPONENTS:
+                G->SCC();
+                //T = G->SCC();
+                cout<<"Print in layers after SCC:"<<"\n";
+                //T->Print_By_Layer(cout);
+                cout<<"\n";
+                cout<<"Preorder print after SCC:"<<"\n";
+                //T->Preorder_Print(cout);
+                cout<<"\n";
+                //delete T;
+                //T=NULL;
+                break;
             case RUN_BFS:
                 if (nodes_array_counter > 0)
                 {
