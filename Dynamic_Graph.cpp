@@ -58,6 +58,71 @@ void Dynamic_Graph:: Delete_Edge(Graph_Edge* edge)
     delete edge;
 }
 
+void Dynamic_Graph::DFS_visit(List<Graph_Node*>* seq,Graph_Node* u, unsigned* colorArr, Tree_Node* parent)
+{
+    colorArr[u->getInsertionTime()] = GRAY;
+    int outSize = u->Get_out_Degree();
+    Tree_Node *rightestSibling;
+    if(outSize > 0)
+    {
+        Graph_Edge *u_v = u->getOutList()->top();
+        Graph_Node *v = u_v->getTo();
+        for (int i = 0; i < outSize; ++i)
+        {
+            if (colorArr[v->getInsertionTime()] == WHITE)
+            {
+                Tree_Node* t = new Tree_Node(v->Get_key());
+                if (parent->getLeftChild() == NULL) {
+                    parent->setLeftChild(t);
+                    t->setParent(parent);
+                    rightestSibling = t;
+                }
+                else
+                {
+                    rightestSibling->setRightSibling(t);
+                    t->setParent(parent);
+                    rightestSibling = t;
+                }
+                DFS_visit(seq, v, colorArr, t);
+            }
+            if(u_v->getOutPointer()->getPrevious()!= NULL)
+            {
+                u_v = u_v->getOutPointer()->getPrevious()->getItem();
+                v = u_v->getTo();
+            }
+        }
+        colorArr[u->getInsertionTime()] = BLACK;
+        seq->pushBack(u);
+    }
+}
+
+void Dynamic_Graph::DFS(List<Graph_Node*>* seq, List<Rooted_Tree*>* connectedComponents)
+{
+    unsigned* colorArr = new unsigned[_insertTime];
+    int nodesSize = _nodes->getSize();
+    Graph_Node* node = _nodes->top();
+    for (int i = 0; i < nodesSize; ++i)
+    {
+        colorArr[node->getInsertionTime()] = WHITE;
+        if (node->getSelfPointer()->getPrevious() != NULL)
+            node = node->getSelfPointer()->getPrevious()->getItem();
+    }
+    node = _nodes->top();
+    for (int i = 0; i < nodesSize; ++i)
+    {
+        if(colorArr[node->getInsertionTime()] == WHITE)
+        {
+            Rooted_Tree* T = new Rooted_Tree();
+            Tree_Node* root = new Tree_Node(node->Get_key());
+            T->setRoot(root);
+            DFS_visit(seq, node, colorArr, root);
+            connectedComponents->pushFront(T);
+        }
+        if (node->getSelfPointer()->getPrevious() != NULL)
+            node = node->getSelfPointer()->getPrevious()->getItem();
+    }
+    delete[] colorArr;
+}
 
 Rooted_Tree* Dynamic_Graph:: SCC() const
 {
@@ -103,36 +168,31 @@ Rooted_Tree*  Dynamic_Graph:: BFS(Graph_Node* source) const
         Graph_Node *v = u_v->getTo();
         for(int i = 0; i < outSize ; i++)
         {
-            if (colorArr[v->getInsertionTime()] != WHITE) {
-                if(u_v->getOutPointer()->getPrevious()!= NULL)
-                {
-                    u_v = u_v->getOutPointer()->getPrevious()->getItem();
-                    v = u_v->getTo();
+            if (colorArr[v->getInsertionTime()] == WHITE) {
+
+
+                if (parent->getLeftChild() == NULL) {
+                    Tree_Node *leftChild = new Tree_Node(v->Get_key());
+                    parent->setLeftChild(leftChild);
+                    leftChild->setParent(parent);
+                    rightestSibling = leftChild;
+                    treeQueue->pushFront(leftChild);
+                } else {
+                    Tree_Node *sibling = new Tree_Node(v->Get_key());
+                    rightestSibling->setRightSibling(sibling);
+                    sibling->setParent(parent);
+                    rightestSibling = sibling;
+                    treeQueue->pushFront(sibling);
                 }
-                continue;
+                colorArr[v->getInsertionTime()] = GRAY;
+                graphQueue->pushFront(v);
             }
-            if (parent->getLeftChild() == NULL) {
-                Tree_Node *leftChild = new Tree_Node(v->Get_key());
-                parent->setLeftChild(leftChild);
-                leftChild->setParent(parent);
-                rightestSibling = leftChild;
-                treeQueue->pushFront(leftChild);
-            }
-            else
-                {
-                Tree_Node *sibling = new Tree_Node(v->Get_key());
-                rightestSibling->setRightSibling(sibling);
-                sibling->setParent(parent);
-                rightestSibling = sibling;
-                treeQueue->pushFront(sibling);
-            }
-            colorArr[v->getInsertionTime()] = GRAY;
-            graphQueue->pushFront(v);
             if(u_v->getOutPointer()->getPrevious()!= NULL)
             {
                 u_v = u_v->getOutPointer()->getPrevious()->getItem();
                 v = u_v->getTo();
             }
+
 
         }
         colorArr[u->getInsertionTime()] = BLACK;

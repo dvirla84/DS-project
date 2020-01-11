@@ -9,6 +9,7 @@
 #define GRAY 1
 #define BLACK 2
 
+
 class Dynamic_Graph {
 private:
     List<Graph_Edge*> *_edges;
@@ -22,7 +23,8 @@ public:
     void Delete_Node(Graph_Node* node);
     Graph_Edge* Insert_Edge(Graph_Node* from, Graph_Node* to);
     void Delete_Edge(Graph_Edge* edge);
-//    void DFS(List<Graph_Node*>* seq)
+    void DFS_visit(List<Graph_Node*>* seq,Graph_Node* u, unsigned* colorArr, Tree_Node* root);
+    void DFS(List<Graph_Node*>* seq, List<Rooted_Tree*>* connectedComponents);
     Rooted_Tree* SCC() const;
     void BFS_init(unsigned* colorArr, Graph_Node* source, List<Graph_Node*> *graphQueue) const;
     Rooted_Tree* BFS(Graph_Node* source) const;
