@@ -61,7 +61,7 @@ void Dynamic_Graph:: Delete_Edge(Graph_Edge* edge)
     delete edge;
 }
 
-void Dynamic_Graph::DFS_visit(List<Graph_Node*>* seq,Graph_Node* u, unsigned* colorArr, Tree_Node* parent) const
+void Dynamic_Graph::DFS_visit(List<Graph_Node*>* seq,Graph_Node* u, unsigned* colorArr, bool transposed,Graph_Node** nodeArr, Tree_Node* parent) const
 {
     colorArr[u->getInsertionTime()] = GRAY;
     int outSize = u->Get_out_Degree();
@@ -74,19 +74,21 @@ void Dynamic_Graph::DFS_visit(List<Graph_Node*>* seq,Graph_Node* u, unsigned* co
         {
             if (colorArr[v->getInsertionTime()] == WHITE)
             {
-                Tree_Node* t = new Tree_Node(v->Get_key());
-                if (parent->getLeftChild() == NULL) {
-                    parent->setLeftChild(t);
-                    t->setParent(parent);
-                    rightestSibling = t;
-                }
-                else
+                if(transposed)
                 {
-                    rightestSibling->setRightSibling(t);
-                    t->setParent(parent);
-                    rightestSibling = t;
+                    Tree_Node *t = new Tree_Node(v->Get_key());
+                    if (parent->getLeftChild() == NULL) {
+                        parent->setLeftChild(t);
+                        t->setParent(parent);
+                        rightestSibling = t;
+                    } else {
+                        rightestSibling->setRightSibling(t);
+                        t->setParent(parent);
+                        rightestSibling = t;
+                    }
+                    DFS_visit(seq, v, colorArr, transposed, nodeArr, t);
                 }
-                DFS_visit(seq, v, colorArr, t);
+                else DFS_visit(seq, v, colorArr, transposed, nodeArr);
             }
             if(u_v->getOutPointer()->getPrevious()!= NULL)
             {
@@ -94,12 +96,14 @@ void Dynamic_Graph::DFS_visit(List<Graph_Node*>* seq,Graph_Node* u, unsigned* co
                 v = u_v->getTo();
             }
         }
-        colorArr[u->getInsertionTime()] = BLACK;
-        seq->pushFront(u);
+
     }
+    colorArr[u->getInsertionTime()] = BLACK;
+    if(!transposed) seq->pushFront(nodeArr[u->getInsertionTime()]);
+
 }
 
-void Dynamic_Graph::DFS(List<Graph_Node*>* seq, List<Rooted_Tree*>* connectedComponents)const {
+void Dynamic_Graph::DFS(List<Graph_Node*>* seq, List<Rooted_Tree*>* connectedComponents, bool transposed, Graph_Node** nodeArr)const {
     unsigned* colorArr = new unsigned[_insertTime];
     int nodesSize = _nodes->getSize();
     Graph_Node* node = _nodes->top();
@@ -109,31 +113,48 @@ void Dynamic_Graph::DFS(List<Graph_Node*>* seq, List<Rooted_Tree*>* connectedCom
         if (node->getSelfPointer()->getPrevious() != NULL)
             node = node->getSelfPointer()->getPrevious()->getItem();
     }
-    node = _nodes->top();
+    if (transposed)
+    {
+        if (seq->getSize() > 0) node = seq->popFront();
+    }
+    else node = _nodes->top();
     for (int i = 0; i < nodesSize; ++i)
     {
         if(colorArr[node->getInsertionTime()] == WHITE)
         {
-            Rooted_Tree* T = new Rooted_Tree();
-            Tree_Node* root = new Tree_Node(node->Get_key());
-            T->setRoot(root);
-            DFS_visit(seq, node, colorArr, root);
-            connectedComponents->pushFront(T);
+            if(transposed)
+            {
+                Rooted_Tree *T = new Rooted_Tree();
+                Tree_Node *root = new Tree_Node(node->Get_key());
+                T->setRoot(root);
+                DFS_visit(seq, node, colorArr, transposed, nodeArr, root);
+                connectedComponents->pushFront(T);
+            }
+            else DFS_visit(seq, node, colorArr, transposed, nodeArr);
         }
-        if (node->getSelfPointer()->getPrevious() != NULL)
-            node = node->getSelfPointer()->getPrevious()->getItem();
+        if (transposed)
+        {
+            if(seq->getSize() >0) node = seq->popFront();
+        }
+        else
+        {
+            if (node->getSelfPointer()->getPrevious() != NULL)
+                node = node->getSelfPointer()->getPrevious()->getItem();
+        }
+
     }
     delete[] colorArr;
 }
 
-Dynamic_Graph* Dynamic_Graph :: Transpose() const
+Dynamic_Graph* Dynamic_Graph :: Transpose(Graph_Node** nodeArr) const
 {
     Dynamic_Graph *transposed = new Dynamic_Graph();
     unsigned nodesSize = _nodes->getSize();
     Graph_Node *node = _nodes->back();
     for(unsigned i = 0; i < nodesSize ; i++)
     {
-        transposed->Insert_Node(node->Get_key());
+        Graph_Node *tNode = transposed->Insert_Node(node->Get_key());
+        nodeArr[node->getInsertionTime()] = tNode;
         if(node->getSelfPointer()->getNext() != NULL)
             node = node->getSelfPointer()->getNext()->getItem();
     }
@@ -141,7 +162,7 @@ Dynamic_Graph* Dynamic_Graph :: Transpose() const
     Graph_Edge *edge = _edges->back();
     for(unsigned i = 0; i < edgesSize; i++)
     {
-        transposed->Insert_Edge(edge->getTo(), edge->getFrom());
+        transposed->Insert_Edge(nodeArr[edge->getTo()->getInsertionTime()], nodeArr[edge->getFrom()->getInsertionTime()]);
         if(edge->getSelfPointer()->getNext() != NULL)
             edge = edge->getSelfPointer()->getNext()->getItem();
     }
@@ -150,9 +171,40 @@ Dynamic_Graph* Dynamic_Graph :: Transpose() const
 
 Rooted_Tree* Dynamic_Graph:: SCC() const
 {
-    List<Graph_Node*>* seq;
-    List<Rooted_Tree*> *connectedComponents;
-    this->DFS(seq, connectedComponents);
+    List<Graph_Node*> *seq = new List<Graph_Node*>;
+    List<Rooted_Tree*> *connectedComponents = new List<Rooted_Tree*>;
+
+    Graph_Node** nodeArr = new Graph_Node*[_insertTime];
+    Dynamic_Graph* transposedGraph = this->Transpose(nodeArr);
+
+    this->DFS(seq,connectedComponents, false, nodeArr);
+    transposedGraph->DFS(seq, connectedComponents, true, nodeArr);
+    Rooted_Tree *CCTree = new Rooted_Tree;
+    Tree_Node* fakeRoot = new Tree_Node(0);
+    CCTree->setRoot(fakeRoot);
+
+    Rooted_Tree *tempTree = connectedComponents->popBack();
+    Tree_Node *rightestBrother = tempTree->getRoot();
+    fakeRoot->setLeftChild(tempTree->getRoot());
+    tempTree->getRoot()->setParent(fakeRoot);
+    tempTree->setRoot(NULL);
+    delete tempTree;
+    unsigned CCSize = connectedComponents->getSize();
+    for (int i = 0; i < CCSize; i++)
+    {
+        tempTree = connectedComponents->popBack();
+        tempTree->getRoot()->setParent(fakeRoot);
+        rightestBrother->setRightSibling(tempTree->getRoot());
+        rightestBrother = tempTree->getRoot();
+        tempTree->setRoot(NULL);
+        delete tempTree;
+    }
+
+    delete [] nodeArr;
+    delete transposedGraph;
+    delete seq;
+    delete connectedComponents;
+    return CCTree;
 }
 void Dynamic_Graph::BFS_init(unsigned* colorArr, Graph_Node* source, List<Graph_Node*> *graphQueue) const
 {

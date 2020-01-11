@@ -94,6 +94,19 @@ bool deleted_node(unsigned key, My_Edge* my_edge_array[], unsigned edges_array_c
 int main()
 {
 
+//    Dynamic_Graph *ex = new Dynamic_Graph;
+//    Graph_Node *a = ex->Insert_Node(1);
+//    Graph_Node *b = ex->Insert_Node(2);
+//    Graph_Node *c = ex->Insert_Node(3);
+//    Graph_Node *d = ex->Insert_Node(4);
+//    Graph_Edge *cb = ex->Insert_Edge(c,b);
+//    Graph_Edge *ba = ex->Insert_Edge(b,a);
+//    Rooted_Tree * exTree = ex->SCC();
+//    exTree->Print_By_Layer(cout);
+//
+//    delete ex;
+//    delete exTree;
+
     srand(SEED);
 
     unsigned node_key = 1;
@@ -195,16 +208,15 @@ int main()
                 }
                 break;
             case STRONGLY_CONNECTED_COMPONENTS:
-                G->SCC();
-                //T = G->SCC();
+                T = G->SCC();
                 cout<<"Print in layers after SCC:"<<"\n";
-                //T->Print_By_Layer(cout);
+                T->Print_By_Layer(cout);
                 cout<<"\n";
                 cout<<"Preorder print after SCC:"<<"\n";
-                //T->Preorder_Print(cout);
+                T->Preorder_Print(cout);
                 cout<<"\n";
-                //delete T;
-                //T=NULL;
+                delete T;
+                T=NULL;
                 break;
             case RUN_BFS:
                 if (nodes_array_counter > 0)

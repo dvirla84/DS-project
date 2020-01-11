@@ -111,8 +111,8 @@ void Rooted_Tree::Preorder_Print(std::ostream & stream) const
         {
             temp = temp->getLeftChild();
             if (temp->getRightSibling() != NULL) rightSiblings->pushFront(temp->getRightSibling());
-            if(rightSiblings->getSize()>0) stream  << temp->Get_key() << "," ;
-            else stream  << temp->Get_key();
+            /*if(rightSiblings->getSize()>0)*/ stream  << temp->Get_key() << "," ;
+           // else stream  << temp->Get_key();
         }
     }
     delete rightSiblings;
