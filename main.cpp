@@ -93,20 +93,6 @@ bool deleted_node(unsigned key, My_Edge* my_edge_array[], unsigned edges_array_c
 
 int main()
 {
-
-//    Dynamic_Graph *ex = new Dynamic_Graph;
-//    Graph_Node *a = ex->Insert_Node(1);
-//    Graph_Node *b = ex->Insert_Node(2);
-//    Graph_Node *c = ex->Insert_Node(3);
-//    Graph_Node *d = ex->Insert_Node(4);
-//    Graph_Edge *cb = ex->Insert_Edge(c,b);
-//    Graph_Edge *ba = ex->Insert_Edge(b,a);
-//    Rooted_Tree * exTree = ex->SCC();
-//    exTree->Print_By_Layer(cout);
-//
-//    delete ex;
-//    delete exTree;
-
     srand(SEED);
 
     unsigned node_key = 1;
