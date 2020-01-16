@@ -29,11 +29,9 @@ public:
             _tail(NULL),
             _size(0)
     {}
-    // need to implement search
 
     T popFront()
     {
-//      if(_size == 0) return NULL;
         T popped = _head->_item;
         ListItem<T>* temp = _head->_previous;
         _size--;
@@ -84,7 +82,6 @@ public:
     }
     T popBack ()
     {
-//      if (_size == 0) return NULL;
         T popped = _tail->_item;
         ListItem<T>* temp = _tail->_next;
         _size --;
