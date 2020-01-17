@@ -106,42 +106,44 @@ void Dynamic_Graph::DFS_visit(List<Graph_Node*>* seq,Graph_Node* u, unsigned* co
 void Dynamic_Graph::DFS(List<Graph_Node*>* seq, List<Rooted_Tree*>* connectedComponents, bool transposed, Graph_Node** nodeArr)const {
     unsigned* colorArr = new unsigned[_insertTime];
     int nodesSize = _nodes->getSize();
-    Graph_Node* node = _nodes->top();
-    for (int i = 0; i < nodesSize; ++i)
+    if(nodesSize > 0)
     {
-        colorArr[node->getInsertionTime()] = WHITE;
-        if (node->getSelfPointer()->getPrevious() != NULL)
-            node = node->getSelfPointer()->getPrevious()->getItem();
-    }
-    if (transposed)
-    {
-        if (seq->getSize() > 0) node = seq->popFront();
-    }
-    else node = _nodes->top();
-    for (int i = 0; i < nodesSize; ++i)
-    {
-        if(colorArr[node->getInsertionTime()] == WHITE)
-        {
-            if(transposed)
-            {
-                Rooted_Tree *T = new Rooted_Tree();
-                Tree_Node *root = new Tree_Node(node->Get_key());
-                T->setRoot(root);
-                DFS_visit(seq, node, colorArr, transposed, nodeArr, root);
-                connectedComponents->pushFront(T);
-            }
-            else DFS_visit(seq, node, colorArr, transposed, nodeArr);
-        }
-        if (transposed)
-        {
-            if(seq->getSize() >0) node = seq->popFront();
-        }
-        else
-        {
+        Graph_Node *node = _nodes->top();
+        for (int i = 0; i < nodesSize; ++i) {
+            colorArr[node->getInsertionTime()] = WHITE;
             if (node->getSelfPointer()->getPrevious() != NULL)
                 node = node->getSelfPointer()->getPrevious()->getItem();
         }
+        if (transposed) {
+            if (seq->getSize() > 0)
+                node = seq->popFront();
+        }
+        else
+            node = _nodes->top();
+        for (int i = 0; i < nodesSize; ++i)
+        {
+            if (colorArr[node->getInsertionTime()] == WHITE) {
+                if (transposed) {
+                    Rooted_Tree *T = new Rooted_Tree();
+                    Tree_Node *root = new Tree_Node(node->Get_key());
+                    T->setRoot(root);
+                    DFS_visit(seq, node, colorArr, transposed, nodeArr, root);
+                    connectedComponents->pushFront(T);
+                }
+                else
+                    DFS_visit(seq, node, colorArr, transposed, nodeArr);
+            }
+            if (transposed) {
+                if (seq->getSize() > 0)
+                    node = seq->popFront();
+            }
+            else
+                {
+                if (node->getSelfPointer()->getPrevious() != NULL)
+                    node = node->getSelfPointer()->getPrevious()->getItem();
+            }
 
+        }
     }
     delete[] colorArr;
 }
@@ -150,21 +152,25 @@ Dynamic_Graph* Dynamic_Graph :: Transpose(Graph_Node** nodeArr) const
 {
     Dynamic_Graph *transposed = new Dynamic_Graph();
     unsigned nodesSize = _nodes->getSize();
-    Graph_Node *node = _nodes->back();
-    for(unsigned i = 0; i < nodesSize ; i++)
-    {
-        Graph_Node *tNode = transposed->Insert_Node(node->Get_key());
-        nodeArr[node->getInsertionTime()] = tNode;
-        if(node->getSelfPointer()->getNext() != NULL)
-            node = node->getSelfPointer()->getNext()->getItem();
+    if(nodesSize > 0) {
+        Graph_Node *node = _nodes->back();
+        for (unsigned i = 0; i < nodesSize; i++) {
+            Graph_Node *tNode = transposed->Insert_Node(node->Get_key());
+            nodeArr[node->getInsertionTime()] = tNode;
+            if (node->getSelfPointer()->getNext() != NULL)
+                node = node->getSelfPointer()->getNext()->getItem();
+        }
     }
     unsigned edgesSize = _edges->getSize();
-    Graph_Edge *edge = _edges->back();
-    for(unsigned i = 0; i < edgesSize; i++)
+    if(edgesSize > 0)
     {
-        transposed->Insert_Edge(nodeArr[edge->getTo()->getInsertionTime()], nodeArr[edge->getFrom()->getInsertionTime()]);
-        if(edge->getSelfPointer()->getNext() != NULL)
-            edge = edge->getSelfPointer()->getNext()->getItem();
+        Graph_Edge *edge = _edges->back();
+        for (unsigned i = 0; i < edgesSize; i++) {
+            transposed->Insert_Edge(nodeArr[edge->getTo()->getInsertionTime()],
+                                    nodeArr[edge->getFrom()->getInsertionTime()]);
+            if (edge->getSelfPointer()->getNext() != NULL)
+                edge = edge->getSelfPointer()->getNext()->getItem();
+        }
     }
     return transposed;
 }
