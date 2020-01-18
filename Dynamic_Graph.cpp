@@ -148,7 +148,7 @@ void Dynamic_Graph::DFS(List<Graph_Node*>* seq, List<Rooted_Tree*>* connectedCom
     delete[] colorArr;
 }
 
-Dynamic_Graph* Dynamic_Graph :: Transpose(Graph_Node** nodeArr) const
+const Dynamic_Graph* Dynamic_Graph :: Transpose(Graph_Node** nodeArr) const
 {
     Dynamic_Graph *transposed = new Dynamic_Graph();
     unsigned nodesSize = _nodes->getSize();
@@ -181,7 +181,7 @@ Rooted_Tree* Dynamic_Graph:: SCC() const
     List<Rooted_Tree*> *connectedComponents = new List<Rooted_Tree*>;
 
     Graph_Node** nodeArr = new Graph_Node*[_insertTime];
-    Dynamic_Graph* transposedGraph = this->Transpose(nodeArr);
+    const Dynamic_Graph* transposedGraph = this->Transpose(nodeArr);
 
     this->DFS(seq,connectedComponents, false, nodeArr);
     transposedGraph->DFS(seq, connectedComponents, true, nodeArr);
@@ -228,7 +228,7 @@ void Dynamic_Graph::BFS_init(unsigned* colorArr, Graph_Node* source, List<Graph_
 }
 
 
-Rooted_Tree*  Dynamic_Graph:: BFS(Graph_Node* source) const
+Rooted_Tree* Dynamic_Graph:: BFS(Graph_Node* source) const
 {
     unsigned* colorArr = new unsigned[_insertTime];
     List<Graph_Node*>* graphQueue = new List<Graph_Node*>;
